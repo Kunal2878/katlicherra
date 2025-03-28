@@ -5,7 +5,7 @@
     return (
       <div className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-center mb-10">Welcome to Katlicherra Central School</h1>
+          <h1 className="text-black-300 text-4xl font-bold text-center mb-10">Welcome to Katlicherra Central School</h1>
           <p className="text-xl text-center text-gray-600 mb-16">
             Transforming education through digital innovation and seamless connectivity
           </p>

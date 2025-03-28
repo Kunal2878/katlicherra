@@ -228,8 +228,10 @@ fetchClasses()
               )}
             </tbody>
           </table>
+        </div>      
+        </div>    
           {showFailure && (
-            <div className="flex items-center justify-center mt-4">
+            <div className="flex items-center justify-center mt-4 p-4">
               <img
                 src={oops}
                 alt="Failure"
@@ -237,8 +239,6 @@ fetchClasses()
               />
             </div>
           )}
-        </div>      
-        </div>    
       </div>
   );
 };
