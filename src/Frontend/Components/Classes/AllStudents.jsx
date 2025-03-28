@@ -390,7 +390,7 @@ useEffect(() => {
         />
       
 {students.length===0 &&(
-  <p className="text-gray-500 text-lg mb-6">No Students available yet, be the first to create one</p>
+  <p className="text-gray-500 text-lg mb-6">No students available yet, be the first to create one</p>
 
 )}
 

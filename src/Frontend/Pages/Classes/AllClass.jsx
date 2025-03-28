@@ -284,7 +284,7 @@ const AllClasses = () => {
             extraClasses="m-4"
           />
       {classes.length === 0 &&(
-        <p className="text-gray-500 text-lg mb-6">No Classes available yet, be the first to create one</p>
+        <p className="text-gray-500 text-lg mb-6">No classes available yet, be the first to create one</p>
 
       )}
       
