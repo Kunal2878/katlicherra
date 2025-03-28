@@ -268,6 +268,8 @@ const TeacherDetails = () => {
                         <p className="text-gray-500 text-lg mb-6">No teachers available yet, be the first to create one</p>
 
           </div>        )}
+
+
       </div>
 
 
@@ -283,7 +285,9 @@ const TeacherDetails = () => {
     alt="Failure"
     className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] lg:h-[350px]  rounded-lg"
   />
-</div>        )}
+</div>        
+)}
+
       {/* Pagination Component */}
       {paginationData.totalPages > 0 && (
         <Pagination

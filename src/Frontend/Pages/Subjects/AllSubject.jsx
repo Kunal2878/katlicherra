@@ -362,12 +362,16 @@
           </div>
         )}
     {subjects.length===0 && (
-         <div className="flex flex-col items-center justify-center mt-4 p-4 ">
+         <div className="flex flex-col items-center justify-center mt-4 p-4">
 <img
+
 src={oops}
 alt="Failure"
-className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] lg:h-[350px]  rounded-lg"
+className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] 
+lg:h-[350px]  rounded-lg"
+
 />
+
 </div> 
       )}
 

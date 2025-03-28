@@ -375,9 +375,6 @@ useEffect(() => {
               />
             </div>
        
-       
-    
-
         {/* Table Component */}
         <Table
           columns={columns}

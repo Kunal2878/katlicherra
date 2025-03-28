@@ -279,21 +279,6 @@ const PerformanceDashboard = () => {
         </div>
       </div>
 
-      {user.role === "principal" && (
-        <div
-          className="mt-12 bg-white p-4 rounded-lg shadow transform transition-all duration-500 ease-out"
-          style={{
-            opacity: showCharts ? 1 : 0,
-            transform: `translateY(${showCharts ? 0 : "20px"})`,
-            transitionDelay: "500ms",
-          }}
-        >
-
-
-          
-        
-        </div>
-      )}
     </div>
   );
 };
