@@ -171,7 +171,7 @@ useEffect(()=>{
           `}>
             <button
               onClick={() => setShowAddTeacher(false)}
-              className="absolute top-6 right-4 p-2 bg-white rounded-full text-black-300 hover:text-gray-800 transition-colors duration-200 transform hover:scale-110"
+              className="absolute top-6 right-4 p-2 bg-white rounded-full text-black-300 hover:text-black-300 transition-colors duration-200 transform hover:scale-110"
             >
               <X size={24} />
             </button>
@@ -183,7 +183,7 @@ useEffect(()=>{
       <div className="bg-white rounded-lg shadow-lg p-4">
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6">
-          <div className="relative flex-1 max-w-md bg-slate-100 text-gray-600">
+          <div className="relative flex-1 max-w-md bg-slate-100 text-black-200">
             <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2"
               size={20}

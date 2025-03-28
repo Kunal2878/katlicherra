@@ -71,7 +71,7 @@ const MySubjects = () => {
                   }`}
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{subject.name}</h3>
-                  <div className="text-gray-600">
+                  <div className="text-black-200">
                     <p className="mb-2"><span className="font-medium">Syllabus:</span> {subject.syllabus}</p>
                     
                   </div>

@@ -50,13 +50,13 @@ const ProfilePage = () => {
 
               <div className="w-4/5">
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-bold text-gray-800">
+                  <h1 className="text-xl font-bold text-black-300">
                     {user?.name || "User"}
                   </h1>
                   <Edit className="w-4 h-4 text-yellow-500" />
                 </div>
                 <div className="flex justify-start text-left gap-2">
-                  <p className="text-gray-600 text-sm mb-1">
+                  <p className="text-black-200 text-sm mb-1">
                     {user.description || "I am glad to be a part of Katlicherra Central School"}
                   </p>
                 </div>
@@ -159,19 +159,19 @@ const ProfilePage = () => {
                 Here you can add important links
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-blue-100 text-gray-600 rounded-full text-sm">
+                <span className="px-3 py-1 bg-blue-100 text-black-200 rounded-full text-sm">
                   Teacher's Classes
                 </span>
-                <span className="px-3 py-1 bg-blue-100 text-gray-600 rounded-full text-sm">
+                <span className="px-3 py-1 bg-blue-100 text-black-200 rounded-full text-sm">
                   Teacher's Subjects
                 </span>
-                <span className="px-3 py-1 bg-yellow-100 text-gray-600 rounded-full text-sm">
+                <span className="px-3 py-1 bg-yellow-100 text-black-200 rounded-full text-sm">
                   Teacher's Payment Status
                 </span>
-                <span className="px-3 py-1 bg-purple-100 text-gray-600 rounded-full text-sm">
+                <span className="px-3 py-1 bg-purple-100 text-black-200 rounded-full text-sm">
                   Teacher's Salary Details
                 </span>
-                <span className="px-3 py-1 bg-green-100 text-gray-600 rounded-full text-sm">
+                <span className="px-3 py-1 bg-green-100 text-black-200 rounded-full text-sm">
                   Teacher's Qualification
                 </span>
               </div>

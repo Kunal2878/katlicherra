@@ -62,7 +62,7 @@ const SelectDropdown = ({
       <button
         type="button"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        className="w-full flex items-center justify-between px-2 py-1.5 md:py-2 bg-transparent border-2 border-black-200 text-gray-600 focus:outline rounded-md text-sm md:text-base"
+        className="w-full flex items-center justify-between px-2 py-1.5 md:py-2 bg-transparent border-2 border-black-200 text-black-200 focus:outline rounded-md text-sm md:text-base"
       >
         <div className="flex items-center">
           {icon && <span className="w-4 h-4 md:w-5 md:h-5 mr-2 text-danger">{icon}</span>}
@@ -79,7 +79,7 @@ const SelectDropdown = ({
               <div
                 key={index}
                 onClick={() => handleSelect(option[valueField])}
-                className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-gray-600 text-sm md:text-base"
+                className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-black-200 text-sm md:text-base"
               >
                 <div
                   className={`w-3 h-3 md:w-4 md:h-4 border rounded mr-2 flex items-center justify-center ${
@@ -95,7 +95,7 @@ const SelectDropdown = ({
                   {(multiple
                     ? Array.isArray(selectedValue) && selectedValue.includes(option[valueField])
                     : selectedValue === option[valueField]) && (
-                    <Check className="w-2 h-2 md:w-3 md:h-3 text-gray-600" />
+                    <Check className="w-2 h-2 md:w-3 md:h-3 text-black-200" />
                   )}
                 </div>
                 {option[displayField]}

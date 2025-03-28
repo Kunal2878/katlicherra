@@ -140,7 +140,7 @@ const RegisterSubjects = () => {
               <div className="relative w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto">
                 <input
                   {...register('name', { required: true })}
-                  className="w-full px-2 py-2 bg-transparent border-2 border-black-200 text-gray-600 focus:outline rounded-lg transition-all peer placeholder-transparent"
+                  className="w-full px-2 py-2 bg-transparent border-2 border-black-200 text-black-200 focus:outline rounded-lg transition-all peer placeholder-transparent"
                   placeholder="Subject Name"
                   id="name"
                 />
@@ -158,7 +158,7 @@ const RegisterSubjects = () => {
                 <button
                   type="button"
                   onClick={() => setIsTeacherDropdownOpen(!isTeacherDropdownOpen)}
-                  className="w-full flex items-center justify-between px-2 py-2 bg-transparent border-2 border-black-200 text-gray-600 focus:outline rounded-lg text-sm md:text-base"
+                  className="w-full flex items-center justify-between px-2 py-2 bg-transparent border-2 border-black-200 text-black-200 focus:outline rounded-lg text-sm md:text-base"
                 >
                   <div className="flex items-center">
                     <User className="w-4 h-4 md:w-5 md:h-5 mr-2 text-danger" />
@@ -177,7 +177,7 @@ const RegisterSubjects = () => {
                           handleTeacherSelect({ target: { value: teacher._id }})
                           setIsTeacherDropdownOpen(false)
                         }}
-                        className="flex items-center px-2 py-2 hover:bg-gray-100 cursor-pointer text-gray-600 text-sm md:text-base"
+                        className="flex items-center px-2 py-2 hover:bg-gray-100 cursor-pointer text-black-200 text-sm md:text-base"
                       >
                         <div
                           className={`w-3 h-3 md:w-4 md:h-4 border rounded mr-2 flex items-center justify-center ${
@@ -187,7 +187,7 @@ const RegisterSubjects = () => {
                           }`}
                         >
                           {selectedTeacher === teacher._id && (
-                            <Check className="w-2 h-2 md:w-3 md:h-3 text-gray-600" />
+                            <Check className="w-2 h-2 md:w-3 md:h-3 text-black-200" />
                           )}
                         </div>
                         {teacher.name} - {teacher.email}
@@ -203,7 +203,7 @@ const RegisterSubjects = () => {
                 <button
                   type="button"
                   onClick={() => setIsClassDropdownOpen(!isClassDropdownOpen)}
-                  className="w-full flex items-center justify-between px-2 py-2 bg-transparent border-2 border-black-200 text-gray-600 focus:outline rounded-lg text-sm md:text-base"
+                  className="w-full flex items-center justify-between px-2 py-2 bg-transparent border-2 border-black-200 text-black-200 focus:outline rounded-lg text-sm md:text-base"
                 >
                   <div className="flex items-center">
                     <School className="w-4 h-4 md:w-5 md:h-5 mr-2 text-danger" />
@@ -222,7 +222,7 @@ const RegisterSubjects = () => {
                           handleClassSelect({ target: { value: classItem.className }})
                           setIsClassDropdownOpen(false)
                         }}
-                        className="flex items-center px-2 py-2 hover:bg-gray-100 cursor-pointer text-gray-600 text-sm md:text-base"
+                        className="flex items-center px-2 py-2 hover:bg-gray-100 cursor-pointer text-black-200 text-sm md:text-base"
                       >
                         <div
                           className={`w-3 h-3 md:w-4 md:h-4 border rounded mr-2 flex items-center justify-center ${
@@ -232,7 +232,7 @@ const RegisterSubjects = () => {
                           }`}
                         >
                           {selectedClass === classItem.className && (
-                            <Check className="w-2 h-2 md:w-3 md:h-3 text-gray-600" />
+                            <Check className="w-2 h-2 md:w-3 md:h-3 text-black-200" />
                           )}
                         </div>
                         {classItem.className}
@@ -247,7 +247,7 @@ const RegisterSubjects = () => {
               <div className="relative w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto">
                 <textarea
                   {...register('syllabus', { required: false })}
-                  className="w-full h-32 p-2 border-2 rounded bg-transparent border-black-200 focus:outline focus:outline-2 focus:outline-primaryBlue text-gray-600 resize-none"
+                  className="w-full h-32 p-2 border-2 rounded bg-transparent border-black-200 focus:outline focus:outline-2 focus:outline-primaryBlue text-black-200 resize-none"
                   placeholder="Enter syllabus topics(separated by commas)"
                   id="syllabus"
                   rows="4"

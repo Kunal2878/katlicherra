@@ -449,7 +449,7 @@ if (isLoading) {
         >
           {/* Header with Add Button and Delete Button */}
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Events</h2>
+            <h2 className="text-2xl font-bold text-black-300">Events</h2>
             <div className="flex items-center gap-4">
               {selectedEvents.length > 0 && (
                 <button
@@ -535,7 +535,7 @@ if (isLoading) {
         >
           {/* Header with Add Button and Delete Button */}
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Announcements</h2>
+            <h2 className="text-2xl font-bold text-black-300">Announcements</h2>
             <div className="flex items-center gap-4">
               {selectedAnnouncements.length > 0 && (
                 <button

@@ -153,7 +153,7 @@ fetchClasses()
           >
             <button
               onClick={() => setShowAddMark(false)}
-              className="absolute top-6 lg:top-6 right-6 p-2 bg-white rounded-full text-black-300 hover:text-gray-800 transition-colors duration-200 transform hover:scale-110"
+              className="absolute top-6 lg:top-6 right-6 p-2 bg-white rounded-full text-black-300 hover:text-black-300 transition-colors duration-200 transform hover:scale-110"
             >
               <X size={24} />
             </button>

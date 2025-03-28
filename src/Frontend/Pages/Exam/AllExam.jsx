@@ -196,7 +196,7 @@ const AllExams = () => {
                 <input
                   id="examName"
                   type="text"
-                  className="w-full px-4 py-2 border-2 bg-transparent border-black-200 text-gray-600 rounded-md shadow-sm focus:outline   transition-all peer placeholder-transparent"
+                  className="w-full px-4 py-2 border-2 bg-transparent border-black-200 text-black-200 rounded-md shadow-sm focus:outline   transition-all peer placeholder-transparent"
                   placeholder="Exam Name"
                   {...register('examName', { required: true })}
                 />
@@ -284,7 +284,7 @@ const AllExams = () => {
 
               {timeTableFile && (
                 <div className="mt-4 w-full">
-                  <p className="text-sm text-gray-600 truncate text-center mb-3">
+                  <p className="text-sm text-black-200 truncate text-center mb-3">
                     Selected: {timeTableFile.name}
                   </p>
                 </div>

@@ -244,7 +244,7 @@ const OtherExpenses = () => {
         <div className="transform transition-all duration-300 translate-x-0 opacity-100">
           {/* Header with Add Button and Delete Button */}
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Other Expenses</h2>
+            <h2 className="text-2xl font-bold text-black-300">Other Expenses</h2>
             <div className="flex items-center gap-4">
               {selectedExpenses.length > 0 && (
                 <button

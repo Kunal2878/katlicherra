@@ -53,13 +53,13 @@ setUser(TeacherData.TeacherData.TeacherData)
 
               <div className="w-4/5">
                 <div className="flex items-center gap-2">
-                                  <h1 className="text-xl font-bold text-gray-800">
+                                  <h1 className="text-xl font-bold text-black-300">
                                     {user?.name || "User"}
                                   </h1>
                                 
                                 </div>
                 <div className="flex justify-start text-left gap-2">
-                  <p className="text-gray-600 text-sm mb-1">
+                  <p className="text-black-200 text-sm mb-1">
                     {user?.description || `Hi I am a teacher`}
                   </p>
                 </div>

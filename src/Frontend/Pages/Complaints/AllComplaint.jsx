@@ -168,19 +168,7 @@
         {/* Filters */}
         <div className="bg-white p-2 rounded-md shadow-lg">
           <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mt-[16px] mb-[32px] bg-white">
-            <div className="relative flex-1 max-w-md text-black p-2 ml-4">
-              <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2"
-                size={20}
-              />
-              <input
-                type="text"
-                placeholder="Search by name"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-11 w-full pl-10 pr-4 py-2 border rounded-lg bg-lamaSkyLight text-black-300 transition-all duration-200"
-              />
-            </div>
+           
 
             <div className="flex gap-4 mr-4">
               <select
@@ -218,7 +206,7 @@
               <tbody>
                 {loading ? null : error ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-4 text-center text-red-700">{error}</td>
+                    <td colSpan="6" className="px-6 py-4 text-center text-black-200">{error}</td>
                   </tr>
                 ) : complaints.length === 0 ? (
                   <tr>

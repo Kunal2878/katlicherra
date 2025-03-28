@@ -203,7 +203,7 @@ const AssignClassSub = () => {
           </button>
         </div>
 
-        <h2 className="text-xl md:text-2xl text-left font-bold mb-8 md:mb-12 mt-4 text-gray-800">
+        <h2 className="text-xl md:text-2xl text-left font-bold mb-8 md:mb-12 mt-4 text-black-300">
           {activeTab === 'assign' ? 'Assign Class and Subjects' : 'Remove Class and Subjects Assignment'}
         </h2>
 
@@ -213,7 +213,7 @@ const AssignClassSub = () => {
               <button
                 type="button"
                 onClick={() => setIsTeacherDropdownOpen(!isTeacherDropdownOpen)}
-                className="w-full flex items-center justify-between px-2 py-1.5 md:py-2 bg-transparent border-2 border-black-200 text-gray-600 focus:outline rounded-md text-sm md:text-base"
+                className="w-full flex items-center justify-between px-2 py-1.5 md:py-2 bg-transparent border-2 border-black-200 text-black-200 focus:outline rounded-md text-sm md:text-base"
               >
                 <div className="h5 flex items-center">
                   <User className="w-4 h-4 md:w-5 md:h-5 mr-2 text-danger" />
@@ -232,7 +232,7 @@ const AssignClassSub = () => {
                         handleTeacherSelect({ target: { value: teacher.email }});
                         setIsTeacherDropdownOpen(false);
                       }}
-                      className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-gray-600 text-sm md:text-base"
+                      className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-black-200 text-sm md:text-base"
                     >
                       <div
                         className={`w-3 h-3 md:w-4 md:h-4 border rounded mr-2 flex items-center justify-center ${
@@ -242,7 +242,7 @@ const AssignClassSub = () => {
                         }`}
                       >
                         {selectedTeacher === teacher.email && (
-                          <Check className="w-2 h-2 md:w-3 md:h-3 text-gray-600" />
+                          <Check className="w-2 h-2 md:w-3 md:h-3 text-black-200" />
                         )}
                       </div>
                       {teacher.name}
@@ -253,7 +253,7 @@ const AssignClassSub = () => {
             </div>
           </div>
 
-          <div className="relative bg-transparent border-2 border-black-200 text-gray-600 rounded-lg focus:outline mb-4">
+          <div className="relative bg-transparent border-2 border-black-200 text-black-200 rounded-lg focus:outline mb-4">
             <button
               type="button"
               onClick={() => setIsClassDropdownOpen(!isClassDropdownOpen)}
@@ -273,7 +273,7 @@ const AssignClassSub = () => {
                   <div
                     key={classItem._id}
                     onClick={() => handleClassSelect(classItem.className, classItem._id)}
-                    className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-gray-600 text-sm md:text-base"
+                    className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-black-200 text-sm md:text-base"
                   >
                     <div
                       className={`w-3 h-3 md:w-4 md:h-4 border rounded mr-2 flex items-center justify-center ${
@@ -283,7 +283,7 @@ const AssignClassSub = () => {
                       }`}
                     >
                       {selectedClassId === classItem._id && (
-                        <Check className="w-2 h-2 md:w-3 md:h-3 text-gray-600" />
+                        <Check className="w-2 h-2 md:w-3 md:h-3 text-black-200" />
                       )}
                     </div>
                     {classItem.className}
@@ -293,7 +293,7 @@ const AssignClassSub = () => {
             )}
           </div>
 
-          <div className="relative bg-transparent border-2 border-black-200 text-gray-600 rounded-lg focus:outline">
+          <div className="relative bg-transparent border-2 border-black-200 text-black-200 rounded-lg focus:outline">
             <button
               type="button"
               onClick={() => selectedClassId && setIsSubjectDropdownOpen(!isSubjectDropdownOpen)}
@@ -317,7 +317,7 @@ const AssignClassSub = () => {
                   <div
                     key={subject._id}
                     onClick={() => toggleSubject(subject.name, subject._id)}
-                    className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-gray-600 text-sm md:text-base"
+                    className="flex items-center px-2 md:px-4 py-1.5 md:py-2 hover:bg-gray-100 cursor-pointer text-black-200 text-sm md:text-base"
                   >
                     <div
                       className={`w-3 h-3 md:w-4 md:h-4 border rounded mr-2 flex items-center justify-center ${
@@ -327,7 +327,7 @@ const AssignClassSub = () => {
                       }`}
                     >
                       {selectedSubjectIds.includes(subject._id) && (
-                        <Check className="w-2 h-2 md:w-3 md:h-3 text-gray-600" />
+                        <Check className="w-2 h-2 md:w-3 md:h-3 text-black-200" />
                       )}
                     </div>
                     {subject.name}

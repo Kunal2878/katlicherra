@@ -150,7 +150,7 @@ console.log(selectedFile)
           </div>
           {selectedFile && (
             <div className="mt-4 w-full">
-              <p className="text-sm text-gray-600 truncate text-center mb-3">
+              <p className="text-sm text-black-200 truncate text-center mb-3">
                 Selected: {selectedFile.name}
               </p>
               <button

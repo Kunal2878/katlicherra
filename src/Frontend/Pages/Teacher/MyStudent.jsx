@@ -59,7 +59,7 @@ const MyStudents = () => {
 
   return (
     <div className="p-6 bg-white min-h-screen mt-12">
-      <div className="flex flex-col md:flex-row text-gray-600 justify-between items-start md:items-center mb-6 bg-purple-50 p-2">
+      <div className="flex flex-col md:flex-row text-black-200 justify-between items-start md:items-center mb-6 bg-purple-50 p-2">
         <div className="mb-4 md:mb-0">
           <h1 className="text-2xl font-semibold mb-2">All Students </h1>
           <div className="flex items-center text-sm ">
@@ -74,7 +74,7 @@ const MyStudents = () => {
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6">
-        <div className="relative flex-1 max-w-md bg-slate-100 text-gray-600">
+        <div className="relative flex-1 max-w-md bg-slate-100 text-black-200">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2" size={20} />
           <input
             type="text"
@@ -89,7 +89,7 @@ const MyStudents = () => {
           <select
             value={selectedClass}
             onChange={(e) => setSelectedClass(e.target.value)}
-            className="p-2 mr-4 bg-slate-100 text-gray-600 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+            className="p-2 mr-4 bg-slate-100 text-black-200 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
           >
             <option value="all">All Classes</option>
             <option value="67adcc61b9b56ef6a16fc907">Class 1</option>
@@ -97,7 +97,7 @@ const MyStudents = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto text-gray-600 text-xs">
+      <div className="overflow-x-auto text-black-200 text-xs">
         <table className="w-full min-w-[768px] pb-10">
           <thead className='bg-purple-50'>
             <tr className="border-b">
@@ -157,7 +157,7 @@ const MyStudents = () => {
 
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4">
         <div className="flex justify-between items-center max-w-screen-xl mx-auto">
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-black-200">
             Showing {indexOfFirstStudent + 1} to {Math.min(indexOfLastStudent, filteredStudents.length)} of {filteredStudents.length} entries
           </span>
           <div className="flex gap-2">
