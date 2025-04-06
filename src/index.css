@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  background-color: #faf9f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  width: 100vw;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.sidebar {
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.waving-hand {
+  animation-name: wave-animation;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+
+
+@layer utilities {
+  /* ===== TYPOGRAPHY */
+  .h1 {
+    @apply text-[34px] leading-[42px] font-bold;
+  }
+  .h2 {
+    @apply text-[24px] leading-[36px] font-bold;
+  }
+  .h3 {
+    @apply text-[20px] leading-[28px] font-semibold;
+  }
+  .h4 {
+    @apply text-[18px] leading-[20px] font-medium;
+  }
+  .h5 {
+    @apply text-[16px] leading-[24px] font-semibold;
+  }
+  .subtitle-1 {
+    @apply text-[16px] leading-[24px] font-medium;
+  }
+  .subtitle-2 {
+    @apply text-[14px] leading-[20px] font-semibold;
+  }
+
+  /* sidebar */
+  .sidebar-nav {
+    @apply h5 mt-9 flex-1 gap-1 text-brand !important;
+  }
+  .sidebar-user-info {
+    @apply flex items-center justify-center gap-2 !important;
+  }
+  .sidebar-user-avatar {
+    @apply aspect-square w-10 rounded-full object-cover !important;
+  }
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #e2e8f0 transparent; /* Thumb color | Track color */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 9999px;
+}
