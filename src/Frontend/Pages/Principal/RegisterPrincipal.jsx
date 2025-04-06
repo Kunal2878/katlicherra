@@ -96,8 +96,8 @@ const RegisterPrincipal = () => {
                   Welcome 👋
                 </h1>
                 <h2 className="mt-6 text-black">
-                  Get Started with <span className="text-purpleColor">Edu</span>
-                  cloud 🚀
+                  Get Started with <span className="text-purpleColor">Katlicherra Central School</span>
+                 
                 </h2>
                 <p className="text-black-300">
                   <i>

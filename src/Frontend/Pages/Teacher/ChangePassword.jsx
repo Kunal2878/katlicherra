@@ -73,8 +73,8 @@ const PasswordChange = () => {
               Change Password
             </h1>
             <h2 className="mt-6 text-black">
-              Update your <span className="text-purpleColor">Edu</span>
-              cloud password 🔐
+              Update your <span className="text-purpleColor">Katlicherra Central School</span>
+             
             </h2>
           </div>
         </div>

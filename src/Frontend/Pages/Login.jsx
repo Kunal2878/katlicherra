@@ -108,8 +108,7 @@ const Login = () => {
                 Hi there 👋
               </h1>
               <h2 className="mt-6 text-black">
-                Get Started with <span className="text-purpleColor">Edu</span>
-                cloud 🚀
+                Get Started with <span className="text-purpleColor">Katlicherra Central School </span>
               </h2>
               {role !== "principal" && (
                 <span className="text-purpleColor">
