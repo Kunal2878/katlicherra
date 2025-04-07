@@ -55,7 +55,7 @@ const CertificateGenerator = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://school-backend-ocze.onrender.com/api/v1/student/getstudentbyclassid/${classId}`
+        `https://katlicherra-backend.onrender.com/api/v1/student/getstudentbyclassid/${classId}`
       );
       setStudents(response.data.data.students);
       console.log(response.data.data.students)

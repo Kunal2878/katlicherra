@@ -16,7 +16,7 @@ const MyStudents = () => {
     const fetchStudents = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://school-backend-ocze.onrender.com/api/v1/student/class/67adcc61b9b56ef6a16fc907');
+        const response = await axios.get('https://katlicherra-backend.onrender.com/api/v1/student/class/67adcc61b9b56ef6a16fc907');
         if (response.data.statusCode === 200) {
           setStudents(response.data.data.students);
         } else {

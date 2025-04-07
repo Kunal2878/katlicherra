@@ -72,7 +72,7 @@ const StudentAttendanceSystem = () => {
     try {
       // Fetch students for the selected class
       const studentsResponse = await axios.get(
-        `https://school-backend-ocze.onrender.com/api/v1/student/getstudentbyclassid/${selectedClass}`
+        `https://katlicherra-backend.onrender.com/api/v1/student/getstudentbyclassid/${selectedClass}`
       );
       const fetchedStudents = studentsResponse.data.data.students;
       setStudents(fetchedStudents);
