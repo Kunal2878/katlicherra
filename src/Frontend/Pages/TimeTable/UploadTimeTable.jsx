@@ -6,7 +6,7 @@ import Toast from "../../Components/Toast";
 import axios from 'axios';
 import {  GetAllClasses } from '../../Route';
 import { Upload, School } from 'lucide-react';
-import SelectDropdown from '../../Components/Elements/SelectDropDownList';
+import SelectDropdown from '../../Components/Elements/SelectDropdownList';
 
 const UploadTimeTable = () => {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
