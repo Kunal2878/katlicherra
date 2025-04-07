@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import{katlicherra} from '../../assets/index'
 import Cookies from "js-cookie";
 // Main Landing Page Component
 const SchoolLandingPage = () => {
@@ -15,9 +14,8 @@ const token= Cookies.get("token")
       <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto sm:px-16 px-6 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <img src={katlicherra} alt="School Logo" className="h-10 w-10 mr-3" />
             <div className="text-black font-bold text-2xl">
-              Katlicherra Central School
+              <span className="text-purpleColor">Katlicherra Central School</span>
             </div>
           </div>
           <div className="hidden md:flex space-x-8">
@@ -43,9 +41,9 @@ const token= Cookies.get("token")
             <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-6 animate-fadeIn">
               Let's Create a Brilliant Future with Our School
             </h1>
-            <p className="text-black-200 mb-8 text-lg animate-slideUp">
-              Katlicherra Central School is now committed to
-              provide high-quality education in real-world
+            <p className="text-gray-600 mb-8 text-lg animate-slideUp">
+              Katlicherra Central School is a technology-first school that is committed to
+              providing high-quality education and employability in real-world
               contexts.
             </p>
             <div
@@ -60,23 +58,23 @@ const token= Cookies.get("token")
               </Link>
             </div>
 
-            {/* <div
+            <div
               className="flex justify-between mt-12 max-w-md animate-slideUp"
               style={{ animationDelay: "0.4s" }}
             >
               <div className="text-center">
                 <div className="text-3xl font-bold text-purpleColor">20+</div>
-                <div className="text-black-200">Schools</div>
+                <div className="text-gray-600">Schools</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purpleColor">10k+</div>
-                <div className="text-black-200">Students</div>
+                <div className="text-gray-600">Students</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purpleColor">4.8</div>
-                <div className="text-black-200">TRUSTED RATING</div>
+                <div className="text-gray-600">TRUSTED RATING</div>
               </div>
-            </div> */}
+            </div>
           </div>
           <div
             className="md:w-1/2 mt-12 md:mt-0 animate-fadeIn"
@@ -130,7 +128,7 @@ const token= Cookies.get("token")
                 </h2>
               </div>
               <p className="text-black-300 mb-8 max-w-lg">
-                Katlicherra Central School's technology-first school management platform that
+                Katlicherra Central School is a technology-first school management platform that
                 is committed to providing high-quality education through digital
                 means
               </p>
@@ -166,14 +164,14 @@ const token= Cookies.get("token")
             <div>
               <h3 className="text-xl font-bold mb-4">Katlicherra Central School</h3>
               <p className="text-gray-400">
-                Technology-first education system for a brilliant future.
+                Technology-first education for a brilliant future.
               </p>
             </div>
         
             <div>
               <h4 className="text-lg font-semibold mb-3">Contact</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>info@Katlicherra Central School.com</li>
+                <li>info@katlicherra.com</li>
                 <li>+919957052223</li>
                 <li>Assam, India</li>
               </ul>
@@ -477,12 +475,12 @@ const FeatureCard = ({ icon, title, description, highlight }) => (
     </div>
     <h3
       className={`text-xl font-semibold mb-3 ${
-        highlight ? "text-white" : "text-black-300"
+        highlight ? "text-white" : "text-gray-800"
       }`}
     >
       {title}
     </h3>
-    <p className={highlight ? "text-blue-50" : "text-black-200"}>
+    <p className={highlight ? "text-blue-50" : "text-gray-600"}>
       {description}
     </p>
   </div>

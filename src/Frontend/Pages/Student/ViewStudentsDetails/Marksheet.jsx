@@ -235,10 +235,6 @@ console.log(studentData,examData,results)
               </p>
             </div>
             <div>
-              {/* <p className="mb-2">
-                <span className="font-semibold mr-2">ID:</span>
-                <span>{studentData?.studentId || studentData?._id || 'N/A'}</span>
-              </p> */}
               <p className="mb-2">
                 <span className="font-semibold mr-2">Examination:</span>
                 <span>{examData}</span>

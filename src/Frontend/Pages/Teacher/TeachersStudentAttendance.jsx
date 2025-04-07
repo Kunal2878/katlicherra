@@ -1,16 +1,19 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Calendar, Save, CheckCircle, XCircle } from "lucide-react";
 import { setStudentAttendanceData,updateStudentAttendance } from '../../../Store/slice';
 import { useSelector, useDispatch } from 'react-redux';
-
-const TeachersStudentAttendanceSystem = () => {
+const StudentAttendanceSystem = () => {
   const dispatch = useDispatch();
   const [selectedClass, setSelectedClass] = useState("");
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+   const [selectedDate, setSelectedDate] = useState(() => {
+      const today = new Date();
+      today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+      return today.toISOString().split('T')[0];
+    });
   const [students, setStudents] = useState([]);
+  const user = useSelector((state) => state.userData.user);
   const attendanceData = useSelector((state) => 
     Array.isArray(state.userData.StudentAttendanceData) 
       ? state.userData.StudentAttendanceData 
@@ -19,10 +22,6 @@ const TeachersStudentAttendanceSystem = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const url = import.meta.env.VITE_API_BASE_URL;
-  const user = useSelector((state) => state.userData.user);
-  
-
-  // Fetch classes on initial mount
 
   useEffect(()=>{
     setSelectedClass(user?.classTeacher)
@@ -51,7 +50,7 @@ const TeachersStudentAttendanceSystem = () => {
     try {
       // Fetch students for the selected class
       const studentsResponse = await axios.get(
-        `https://katlicherra-backend.onrender.com/api/v1/student/getstudentbyclassid/${selectedClass}`
+        `https://school-backend-ocze.onrender.com/api/v1/student/getstudentbyclassid/${selectedClass}`
       );
       const fetchedStudents = studentsResponse.data.data.students;
       setStudents(fetchedStudents);
@@ -105,7 +104,6 @@ const TeachersStudentAttendanceSystem = () => {
   };
 
 
-
   // Handle date change
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
@@ -120,28 +118,46 @@ const TeachersStudentAttendanceSystem = () => {
     return studentAttendance ? studentAttendance.status : null;
   };
 
-  // Update attendance status for a specific student
+  // Update attendance status for a specific student with toggle functionality
   const handleAttendanceChange = (studentId, status) => {
-   
-
+    // Find current status of this student
+    const currentStatus = attendanceData.find(
+      (item) => item.student === studentId
+    )?.status;
+    
+    // If clicking the same status that's already selected, set to null
+    // Otherwise, update to the new status
+    const newStatus = currentStatus === status ? null : status;
+    
     dispatch(updateStudentAttendance({ 
       studentId, 
-      status 
+      status: newStatus 
     }));
   };
+
   // Set attendance status for all students
   const setAllStudentsStatus = (status) => {
+    // Get the current statuses to check if all students already have this status
+    const allHaveStatus = students.every(student => 
+      getAttendanceStatus(student._id) === status
+    );
+    
+    // If all students already have this status, set all to null (toggle off)
+    // Otherwise, set all to the provided status
+    const newStatus = allHaveStatus ? null : status;
+    
     const newData = students.map((student) => ({
       student: student._id,
-      status,
+      status: newStatus,
     }));
+    
     dispatch(setStudentAttendanceData(newData));
   };
 
   // Save attendance
   const saveAttendance = async () => {
     if (!selectedClass || !selectedDate) {
-      setMessage("Class or date is not selected");
+      setMessage("Please select a class and date");
       return;
     }
 
@@ -192,6 +208,7 @@ const TeachersStudentAttendanceSystem = () => {
 
       <div className="bg-white p-4 rounded-lg shadow-lg m-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -223,22 +240,34 @@ const TeachersStudentAttendanceSystem = () => {
               </span>
               <div className="flex gap-2">
                 <label className="flex items-center gap-1 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="bulkAttendance"
-                    onChange={() => setAllStudentsStatus("present")}
-                    className="appearance-none w-4 h-4 border border-gray-300 rounded-full checked:bg-success-500 checked:border-success-500"
-                  />
+                  <div 
+                    onClick={() => setAllStudentsStatus("present")}
+                    className={`w-4 h-4 border border-gray-300 rounded-full flex items-center justify-center ${
+                      students.every(student => getAttendanceStatus(student._id) === "present") 
+                        ? "bg-success-500 border-success-500" 
+                        : ""
+                    }`}
+                  >
+                    {students.every(student => getAttendanceStatus(student._id) === "present") && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
+                  </div>
                   <span className="text-success-500">Present</span>
                 </label>
 
                 <label className="flex items-center gap-1 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="bulkAttendance"
-                    onChange={() => setAllStudentsStatus("absent")}
-                    className="appearance-none w-4 h-4 border border-gray-300 rounded-full checked:bg-red-500 checked:border-red-500"
-                  />
+                  <div 
+                    onClick={() => setAllStudentsStatus("absent")}
+                    className={`w-4 h-4 border border-gray-300 rounded-full flex items-center justify-center ${
+                      students.every(student => getAttendanceStatus(student._id) === "absent") 
+                        ? "bg-red-500 border-red-500" 
+                        : ""
+                    }`}
+                  >
+                    {students.every(student => getAttendanceStatus(student._id) === "absent") && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
+                  </div>
                   <span className="text-danger">Absent</span>
                 </label>
               </div>
@@ -291,16 +320,18 @@ const TeachersStudentAttendanceSystem = () => {
                                   : ""
                               }`}
                             >
-                              <input
-                                type="radio"
-                                name={`attendance-${student._id}`}
-                                value="present"
-                                checked={getAttendanceStatus(student._id) === "present"}
-                                onChange={() =>
-                                  handleAttendanceChange(student._id, "present")
-                                }
-                                className="appearance-none w-4 h-4 border border-gray-300 rounded-full checked:bg-success-500 checked:border-success-500"
-                              />
+                              <div 
+                                onClick={() => handleAttendanceChange(student._id, "present")}
+                                className={`w-4 h-4 border border-gray-300 rounded-full flex items-center justify-center ${
+                                  getAttendanceStatus(student._id) === "present" 
+                                    ? "bg-success-500 border-success-500" 
+                                    : ""
+                                }`}
+                              >
+                                {getAttendanceStatus(student._id) === "present" && (
+                                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                                )}
+                              </div>
                               <CheckCircle
                                 size={18}
                                 className="text-success-400"
@@ -315,16 +346,18 @@ const TeachersStudentAttendanceSystem = () => {
                                   : ""
                               }`}
                             >
-                              <input
-                                type="radio"
-                                name={`attendance-${student._id}`}
-                                value="absent"
-                                checked={getAttendanceStatus(student._id) === "absent"}
-                                onChange={() =>
-                                  handleAttendanceChange(student._id, "absent")
-                                }
-                                className="appearance-none w-4 h-4 border border-gray-300 rounded-full checked:bg-red-500 checked:border-red-500"
-                              />
+                              <div 
+                                onClick={() => handleAttendanceChange(student._id, "absent")}
+                                className={`w-4 h-4 border border-gray-300 rounded-full flex items-center justify-center ${
+                                  getAttendanceStatus(student._id) === "absent" 
+                                    ? "bg-red-500 border-red-500" 
+                                    : ""
+                                }`}
+                              >
+                                {getAttendanceStatus(student._id) === "absent" && (
+                                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                                )}
+                              </div>
                               <XCircle size={18} className="text-red-500" />
                               <span>Absent</span>
                             </label>
@@ -366,4 +399,4 @@ const TeachersStudentAttendanceSystem = () => {
   );
 };
 
-export default TeachersStudentAttendanceSystem;
+export default StudentAttendanceSystem;

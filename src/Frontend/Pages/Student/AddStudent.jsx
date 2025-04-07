@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
-import { Mail,Lock,User,ArrowRight,Eye,EyeOff,Phone, VenusAndMars, School2
+import { Mail,Lock,User,ArrowRight,Eye,EyeOff,Phone, VenusAndMars, School2,Calendar, IdCard, MapPin
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +10,7 @@ import { setStudentData,setIsStudentUpdate } from "../../../Store/slice";
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../Components/Elements/Input";
-import SelectDropdown from "../../Components/Elements/SelectDropdown";
+import SelectDropdown from "../../Components/Elements/SelectDropDown";
 
 const AddStudents = () => {
   const {
@@ -63,7 +63,9 @@ const AddStudents = () => {
       });
       setClassData(response.data.data.classes);
     } catch (error) {
-      console.error("Error fetching classes:", error);
+      setShowToast(true);
+      setToastMessage(error.response.data.message || "Failed to fetch classes");
+      setToastType("error");
     }
   };
 
@@ -77,7 +79,15 @@ const AddStudents = () => {
       email: data.email,
       password: data.password,
       parentContact: data.parentContact,
+      phoneNumber: data.phoneNumber,
       parentName: data.parentName,
+      dob:data.dob,
+      studentPan:data.studentPan,
+      aadharId:data.aadharId,
+      motherAadhar:data.motherAadhar,
+      fatherAadhar:data.fatherAadhar,
+      address:data.address,
+      whatsappNumber:data.whatsappNumber,
       studentClass: selectedClass,
       gender: selectedGender
     };
@@ -105,11 +115,8 @@ const AddStudents = () => {
         setSelectedClass("");
         setSelectedGender("");
         dispatch(setIsStudentUpdate(true))
-      } else if (response.status === 500) {
-        setShowToast(true);
-        setToastMessage(response.data.message);
-        setToastType("error");
-      } else {
+      } 
+       else {
         setShowToast(true);
         setToastMessage(response.data.message);
         setToastType("error");
@@ -118,6 +125,12 @@ const AddStudents = () => {
       setShowToast(true);
       setToastMessage(error.response?.data.message);
       setToastType("error");
+
+       if (response.status === 401) {  
+                  Cookies.remove('user');
+                  Cookies.remove('token');
+                  window.location.href = '/user-options';                      
+                }
     } finally {
       setLoading(false);
       reset();
@@ -134,7 +147,7 @@ const AddStudents = () => {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mt-8 space-y-8 mb-4"
+          className="mt-8 space-y-10 mb-4"
         >
           <Input
             id="name"
@@ -166,7 +179,110 @@ const AddStudents = () => {
             }}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
           />
-          
+          <Input
+            id="dob"
+            name="dob"
+            label="Date of Birth"
+            type= "date"
+            register={register}
+            errors={errors}
+            required="Date of Birth is required"
+            placeholder="eg. 2023-08-15"
+            icon={Calendar}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto [color-scheme:light]"
+          />
+   <Input
+            id="studentPan"
+            name="studentPan"
+            label="Student Pan"
+            register={register}
+            errors={errors}
+            required="Pan is required"
+            placeholder="Student Pan"
+            icon={IdCard}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+   <Input
+            id="aadharId"
+            name="aadharId"
+            label="Student Aadhaar ID"
+            register={register}
+            errors={errors}
+            required="Student Aadhaar is required"
+            placeholder="Student Aadhaar"
+            icon={IdCard}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+   <Input
+            id="motherAadhar"
+            name="motherAadhar"
+            label="Aadhaar ID of Mother"
+            register={register}
+            errors={errors}
+            required="Aadhaar ID of Mother is required"
+            placeholder="Aadhaar ID of Mother"
+            icon={IdCard}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+          <Input
+            id="fatherAadhar"
+            name="fatherAadhar"
+            label="Aadhaar ID of Father"
+            register={register}
+            errors={errors}
+            required="Aadhaar ID of Father is required"
+            placeholder="Aadhaar ID of Father"
+            icon={IdCard}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+          <Input
+            id="address"
+            name="address"
+            label="Address"
+            register={register}
+            errors={errors}
+            required="Address is required"
+            placeholder="Address"
+            icon={MapPin}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+    <Input
+            id="phoneNumber"
+            name="phoneNumber"
+            label="Phone No."
+            register={register}
+            errors={errors}
+            required="Phone No. is  required"
+            type="text"
+            placeholder="eg. 9876543210"
+            icon={Phone}
+            validation={{
+              pattern: {
+                value: /^[0-9]{10}$/,
+                message: "Invalid phone number",
+              },
+            }}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+    <Input
+            id="whatsappNumber"
+            name="whatsappNumber"
+            label="Whatsapp No."
+            register={register}
+            errors={errors}
+            required="Whatsapp No. is required"
+            type="text"
+            placeholder="eg. 9876543210"
+            icon={Phone}
+            validation={{
+              pattern: {
+                value: /^[0-9]{10}$/,
+                message: "Invalid phone number",
+              },
+            }}
+            className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+          />
+
           <Input
             id="parentName"
             name="parentName"
@@ -198,6 +314,12 @@ const AddStudents = () => {
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
           />
           
+
+
+
+
+
+
           <div className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto">
             <SelectDropdown
               options={classData || []}
@@ -224,70 +346,80 @@ const AddStudents = () => {
             />
           </div>
           
-          <div className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto relative">
-            <Input
-              id="password"
-              name="password"
-              label="Password"
-              register={register}
-              errors={errors}
-              required="Password is required"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              icon={Lock}
-              validation={{
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
-                },
-              }}
-              className="w-full"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-500"
-            >
-              {showPassword ? (
-                <EyeOff className="h-5 w-5" />
-              ) : (
-                <Eye className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+          <div className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto mb-8">
+  {/* Added margin-bottom (mb-8) to make space for the error message */}
+  <div className="relative">
+    <Input
+      id="password"
+      name="password"
+      label="Password"
+      register={register}
+      errors={errors}
+      required="Password is required"
+      type={showPassword ? "text" : "password"}
+      placeholder="Password"
+      icon={Lock}
+      validation={{
+        minLength: {
+          value: 8,
+          message: "Password must be at least 8 characters",
+        },
+      }}
+      className="w-full"
+    />
+    {/* The eye icon positioned absolutely relative to the parent div */}
+    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-500">
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        {showPassword ? (
+          <EyeOff className="h-5 w-5" />
+        ) : (
+          <Eye className="h-5 w-5" />
+        )}
+      </button>
+    </div>
+  </div>
+</div>
           
-          <div className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto relative">
-            <Input
-              id="confirmPassword"
-              name="confirmPassword"
-              label="Confirm Password"
-              register={register}
-              errors={errors}
-              required="Please confirm your password"
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              icon={Lock}
-              validation={{
-                validate: (val) => {
-                  if (watch("password") != val) {
-                    return "Passwords do not match";
-                  }
-                },
-              }}
-              className="w-full"
-            />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-500"
-            >
-              {showConfirmPassword ? (
-                <EyeOff className="h-5 w-5" />
-              ) : (
-                <Eye className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+          <div className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto mb-8">
+  {/* Added margin-bottom (mb-8) to make space for the error message */}
+  <div className="relative">
+    <Input
+      id="confirmPassword"
+      name="confirmPassword"
+      label="Confirm Password"
+      register={register}
+      errors={errors}
+      required="Please confirm your password"
+      type={showConfirmPassword ? "text" : "password"}
+      placeholder="Confirm Password"
+      icon={Lock}
+      validation={{
+        validate: (val) => {
+          if (watch("password") != val) {
+            return "Passwords do not match";
+          }
+        },
+      }}
+      className="w-full"
+    />
+    {/* The eye icon positioned absolutely relative to the parent div */}
+    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-500">
+      <button
+        type="button"
+        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+      >
+        {showConfirmPassword ? (
+          <EyeOff className="h-5 w-5" />
+        ) : (
+          <Eye className="h-5 w-5" />
+        )}
+      </button>
+    </div>
+  </div>
+</div>
           
           <div className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto">
             <button

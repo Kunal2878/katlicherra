@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Loader,
   Plus,
-  X,
+  X,School2
 } from "lucide-react";
 
 import AddMark from "./AddMark";
@@ -10,8 +10,8 @@ import Cookies from "js-cookie";
 import {setLeaderBoard,setClassData,setIsLeaderBoardUpdate} from '../../../Store/slice'
 import {GetLeaderBoardAPI, GetAllClassesAPI  ,GetStudentByIDAPI} from '../../../service/api'
 import {useSelector, useDispatch} from 'react-redux'
+import SelectDropdown from '../../Components/Elements/SelectDropDown'
 import { toast } from 'react-toastify';
-import {oops} from '../../../assets/index'
 const LeaderBoard = () => {
   const [selectedClass, setSelectedClass] = useState("");
   const [loading, setLoading] = useState(true); 
@@ -68,7 +68,12 @@ const LeaderBoard = () => {
       // showToastMessage(response.message, "success");
     }
     else{
-  
+    
+        dispatch(setLeaderBoard([]));
+        setShowToast(true);
+        setToastMessage(response.message);
+        setToastType("error");
+    
     }
   };
 
@@ -79,6 +84,7 @@ fetchClasses()
     if(classes.length === 0 || leaderboardData.length===0) {
       setShowFailure(true);
     } else {
+      
       setShowFailure(false);
     }
   },[classes, leaderboardData])
@@ -94,13 +100,11 @@ fetchClasses()
         response.data.forEach(item => {
         fetchStudentData(item.student);
         });
-        setShowFailure(response.data.length === 0);
-        setShowToast(true);
-        setToastMessage(response.message);
-        setToastType("success");
+    
       } 
       
       else {
+        dispatch(setLeaderBoard([]));
         setShowToast(true);
         setToastMessage(response.message);
         setToastType("error");
@@ -153,7 +157,7 @@ fetchClasses()
           >
             <button
               onClick={() => setShowAddMark(false)}
-              className="absolute top-6 lg:top-6 right-6 p-2 bg-white rounded-full text-black-300 hover:text-black-300 transition-colors duration-200 transform hover:scale-110"
+              className="absolute top-6 lg:top-6 right-6 p-2 bg-white rounded-full text-black-300 hover:text-gray-800 transition-colors duration-200 transform hover:scale-110"
             >
               <X size={24} />
             </button>
@@ -163,38 +167,27 @@ fetchClasses()
       </div>
 
       <div className="flex flex-col md:flex-row text-black justify-between items-start md:items-center mb-6 p-2">
-      <div className="mb-4 md:mb-0">
+      <div className="mb-4 md:mb-0 text-left">
           <h2 className="h2 mb-2">Student Leaderboard</h2>
-          <div className="flex items-center subtitle-2">
+          <div className="flex items-center subtitle-2 text-left">
             <span className="">Students Details / </span>
             <span>Student Leaderboard</span>
           </div>
         </div>
-        {/* <button
-          onClick={() => setShowAddMark(true)}
-          className="flex items-center p-2 bg-success-500 text-white rounded-full transition-colors duration-200 transform hover:scale-105"
-        >
-          <Plus size={24} />
-        </button> */}
       </div>
 
       <div className="bg-white p-2 rounded-md shadow-lg">
         <div className="flex flex-col md:flex-row justify-end items-stretch md:items-center gap-4 mb-6 bg-white">
-          <div className="flex gap-4 mr-4">
-            <select
-              value={selectedClass}
-              onChange={(e) => setSelectedClass(e.target.value)}
-              className="p-2 border rounded-lg bg-primary-300 text-black-300 border-lamaSkyLight transition-all duration-200"
-            >
-              <option value="">All Classes</option>
-              {Array.isArray(classes) &&
-                classes?.map((cls) => (
-                  <option key={cls._id} value={cls._id}>
-                    {cls.className}
-                  </option>
-                ))}
-            </select>
-          </div>
+        <SelectDropdown
+                options={classes || []}
+                selectedValue={selectedClass}
+                onSelect={setSelectedClass}
+                displayField="className"
+                valueField="_id"
+                placeholder="Select Class"
+                icon={<School2 size={20} />}
+                required={true}
+              />
         </div>
 
         <div className="overflow-x-auto text-black-300 text-base bg-white m-4">
@@ -228,17 +221,9 @@ fetchClasses()
               )}
             </tbody>
           </table>
+       
         </div>      
         </div>    
-          {showFailure && (
-            <div className="flex items-center justify-center mt-4 p-4">
-              <img
-                src={oops}
-                alt="Failure"
-                className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] lg:h-[350px] border-2 rounded-md"
-              />
-            </div>
-          )}
       </div>
   );
 };

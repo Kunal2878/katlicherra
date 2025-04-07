@@ -3,6 +3,7 @@ import './App.css'
 import SchoolLandingPage from './Frontend/Pages/LandingPage2'
 import UnderMaintenance from './Frontend/Pages/UnderMaintence'
 import Nav from './Frontend/Components/Navbar/Navbar'
+import ConfirmationLogout from './Frontend/Components/ConfirmationLogout'
 import RegisterPrincipal from './Frontend/Pages/Principal/RegisterPrincipal'
 import Login from './Frontend/Pages/Login'
 import UserOption from './Frontend/Pages/UserOption'
@@ -12,11 +13,12 @@ import About from './Frontend/Pages/About'
 import Test from './Test'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 function App() {
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <UserOption/>
+      element: <UserOption />
     },
     {
       path: "/user-options",
@@ -30,6 +32,8 @@ function App() {
       path: "/login",
       element: <Login/>
     },
+
+
     {
       path: "/user-options",
       element: < UserOption/> 
@@ -37,140 +41,149 @@ function App() {
     },
     {
       path:'/dashboard',
-      element:<Nav path={"/dashboard"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/dashboard"}/>
     },
     {
       path:'/mark-attendance',
-      element:<Nav path={"/mark-attendance"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/mark-attendance"}/>
     },
     {
       path:'/profile',
-      element:<Nav path={"/profile"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/profile"}/>
     },
     {
       path:'/all-students',
-      element:<Nav path={"/all-students"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/all-students"}/>
     },
     {
       path:'/student-promotion',
-      element:<Nav path={"/student-promotion"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/student-promotion"}/>
     },
     {
       path:'/all-teachers',
-      element:<Nav path={"/all-teachers"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/all-teachers"}/>
     },
     {
       path:'/assign-classes-subjects',
-      element:<Nav path={"/assign-classes-subjects"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/assign-classes-subjects"}/>
     },
     {
       path:'/register-class',
-      element:<Nav path={"/register-class"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/register-class"}/>
     },
     {
       path:'/events',
-      element:<Nav path={"/events"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/events"}/>
     },
     {
       path:'/add-students',
-      element:<Nav path={"/add-students"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/add-students"}/>
     },
     {
       path:'/add-teachers',
-      element:<Nav path={"/add-teachers"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/add-teachers"}/>
     },
     {
       path:'/register-subjects',
-      element:<Nav path={"/register-subjects"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/register-subjects"}/>
     },
     {
       path:'/time-table',
-      element:<Nav path={"/time-table"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/time-table"}/>
     },
     {
       path:'/all-exams',
-      element:<Nav path={"/all-exams"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/all-exams"}/>
     },
     {
       path:'/my-attendance',
-      element:<Nav path={"/my-attendance"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-attendance"}/>
     },
     {
       path:'/my-exams',
-      element:<Nav path={"/my-exams"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-exams"}/>
     },
     {
       path:'/my-subjects',
-      element:<Nav path={"/my-subjects"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-subjects"}/>
     },
     {
       path:'/my-results',
-      element:<Nav path={"/my-results"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-results"}/>
     },
     {
       path:'/my-students',
-      element:<Nav path={"/my-students"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-students"}/>
     },
     {
       path:'/all-classes',
-      element:<Nav path={"/all-classes"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/all-classes"}/>
     },
     {
       path:'/payment-modes',
-      element:<Nav path={"/payment-modes"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/payment-modes"}/>
     },
     {
       path:'/all-subjects',
-      element:<Nav path={"/all-subjects"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/all-subjects"}/>
     },
     {
       path:'/leaderboard',
-      element:<Nav path={"/leaderboard"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/leaderboard"}/>
     },
     {
       path:'/add-marks',
-      element:<Nav path={"/add-marks"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/add-marks"}/>
     },
     {
       path:'/id-card',
-      element:<Nav path={"/id-card"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/id-card"}/>
     },
     {
       path:'/teacher-id-card',
-      element:<Nav path={"/teacher-id-card"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/teacher-id-card"}/>
     },
     {
       path:'/teacher-attendance',
-      element:<Nav path={"/teacher-attendance"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/teacher-attendance"}/>
     },
     {
+      path:'/teacher-leave-records',
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/teacher-leave-records"}/>
+    },
+    {
+      path:'/leave-records',
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/leave-records"}/>
+    },
+
+    {
       path:'/my-time-table',
-      element:<Nav path={"/my-time-table"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-time-table"}/>
     },
     {
       path:'/my-results',
-      element:<Nav path={"/my-results"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-results"}/>
     },
     {
       path:'/my-subjects',
-      element:<Nav path={"/my-subjects"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-subjects"}/>
     },
    
     {
       path:'/complaints',
-      element:<Nav path={"/complaints"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/complaints"}/>
     },
     {
       path:'/my-complaints',
-      element:<Nav path={"/my-complaints"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-complaints"}/>
     },
     {
       path:'/certificate',
-      element:<Nav path={"/certificate"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/certificate"}/>
     },
     {
       path:'/id-card',
-      element:<Nav path={"/id-card"}/>
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/id-card"}/>
     },
     
     {
@@ -184,83 +197,77 @@ function App() {
     {
       path:'/test',
       element:<Test/>
-
     },
     {
       path:'/know-more',
       element:<About/>
-
     },
     {
       path:'/teacher-attendance',
-      element:<Nav path={"/teacher-attendance"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/teacher-attendance"}/>
     },
     {
       path:'/class-teacher',
-      element:<Nav path={"/class-teacher"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/class-teacher"}/>
     },
     {
       path:'/all-transactions',
-      element:<Nav path={"/all-transactions"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/all-transactions"}/>
     },
     {
       path:'/student-finance',
-      element:<Nav path={"/student-finance"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/student-finance"}/>
     },
     {
       path:'/my-dues',
-      element:<Nav path={"/my-dues"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-dues"}/>
     },
     {
       path:'/change-password',
-      element:<Nav path={"/change-password"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/change-password"}/>
     },
     {
       path:'/other-expenses',
-      element:<Nav path={"/other-expenses"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/other-expenses"}/>
     },
     {
       path:'/my-attendance-teacher',
-      element:<Nav path={"/my-attendance-teacher"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/my-attendance-teacher"}/>
     },
     {
       path:'/grades-upload',
-      element:<Nav path={"/grades-upload"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/grades-upload"}/>
     },
     {
       path:'/student-list-teacher',
-      element:<Nav path={"/student-list-teacher"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/student-list-teacher"}/>
     },
     {
       path:'/student-leaderboard-teacher',
-      element:<Nav path={"/student-leaderboard-teacher"}/>
-
-    },
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/student-leaderboard-teacher"}/>
+    },   
+    
     {
       path:'/add-marks-student',
-      element:<Nav path={"/add-marks-student"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/add-marks-student"}/>
     },
     {
       path:'/student-attendance-teacher',
-      element:<Nav path={"/student-attendance-teacher"}/>
-
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/student-attendance-teacher"}/>
     },
     {
       path:'/student-marksheet',
-      element:<Nav path={"/student-marksheet"}/>
-
-    }
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/student-marksheet"}/>
+    },
+    {
+      path:'/confirm-logout',
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/confirm-logout"}/>
+    }  ,
+    {
+      path:'/teacher-finance-data',
+      element: !Cookies.get("token") || !Cookies.get("user") ? <UserOption/> : <Nav path={"/teacher-finance-data"}/>
+    }  
+  
   ])
 
   return (

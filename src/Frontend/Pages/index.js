@@ -47,6 +47,9 @@ import TeacherStudentMarksheet from './Teacher/TeachersStudentMarksheet'
 import TeacherDetails from "./Teacher/AllTeacher";
 import Results from "./Teacher/Results";
 
+
+import  ConfirmationLogout from '../Components/ConfirmationLogout'
+
 // subjects
 import RegisterSubjects from "./Subjects/RegisterSubject";
 import AllSubjects from "./Subjects/AllSubject";
@@ -61,7 +64,11 @@ import AllClasses from "./Classes/AllClass";
 
 //Exams
 import AllExams from "./Exam/AllExam";
-//Khata Book
+//Leaves
+import AllLeaveDetails from "./Leaves/AllLeaves"
+import TeacherLeaves from "./Leaves/TeacherLeave"
+
+import TeacherFinance from "./Teacher/MyFinance"
 
 
 
@@ -122,6 +129,10 @@ export {
   TeachersStudentLeaderBoard,
   TeachersStudentAddMarks,
   TeachersStudentAttendanceSystem,
-  TeacherStudentMarksheet
+  TeacherStudentMarksheet,
+  ConfirmationLogout,
+  AllLeaveDetails,
+  TeacherLeaves,
+  TeacherFinance
 
 };

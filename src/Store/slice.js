@@ -8,8 +8,15 @@ const dataSlice = createSlice({
     StudentCount:'',
     TeacherCount:'',
     CurrentPage:1,
+    eventsChanged:'',
     isStudentUpdate:false,
     isLeaderboardUpdate:false,
+    showLogoutConfirm:false,
+    showConfirmationModel:false,
+    confirmRequest:false,
+    transactionUpdate:false,
+    status:'',
+    addText:'',
     user:[],
     LoginData:[],
     ClassData:[],
@@ -24,7 +31,9 @@ const dataSlice = createSlice({
     StudentFinanceData:[],
     OtherExpenseData:[],
     TeacherAttendanceData:[],
-    StudentAttendanceData:[]
+    StudentAttendanceData:[],
+    GenderRatio:[],
+    LeaveData:[]
 
   },
   reducers: {
@@ -114,16 +123,46 @@ state.isLeaderboardUpdate= action.payload
           status 
         });
       }
-    }
+    },
+    
+setGenderRatio:(state,action)=>{
+      state.GenderRatio = action.payload
+},
 
+setShowLogoutConfirm:(state,action) =>{
+  state.showLogoutConfirm=action.payload
+},
+setShowConfirmationModel:(state,action) =>{
+  state.showConfirmationModel=action.payload
+},
+setStatus:(state,action) =>{
+  state.status=action.payload
+},
+setAddText:(state,action) =>{
+  state.addText=action.payload
+},
+setConfirmRequest:(state,action) =>{
+  state.confirmRequest=action.payload
+},
+setLeaveData:(state,action) =>{
+  state.LeaveData=action.payload
+},
+setEventsChanged:(state,action) =>{
+  state.eventsChanged=action.payload
+},
+setTransactionUpdate:(state,action) =>{
+  state.transactionUpdate=action.payload
+},
 
-  },
+}
 })
 
 export const {setRole,setUser,setLoginData,setClassData,setStudentData,setTeacherData,setSubjectData,
   setEventData,setAnnouncementData,setStudentCount,setTeacherCount,
   setLeaderBoard,setCurrentPage,setTransactionData,setStudentFinanceData,
   setOtherExpenseData,setStudentByClassData,setIsStudentUpdate,setTeacherAttendanceData,
-  setStudentAttendanceData ,updateStudentAttendance,setIsLeaderBoardUpdate}
+  setStudentAttendanceData ,updateStudentAttendance,setIsLeaderBoardUpdate,setGenderRatio,setShowLogoutConfirm,
+  setShowConfirmationModel,setStatus,setAddText,setConfirmRequest,setLeaveData,
+  setEventsChanged,setTransactionUpdate}
  = dataSlice.actions
 export default dataSlice.reducer

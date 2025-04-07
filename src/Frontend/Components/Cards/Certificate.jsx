@@ -55,7 +55,7 @@ const CertificateGenerator = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://katlicherra-backend.onrender.com/api/v1/student/getstudentbyclassid/${classId}`
+        `https://school-backend-ocze.onrender.com/api/v1/student/getstudentbyclassid/${classId}`
       );
       setStudents(response.data.data.students);
       console.log(response.data.data.students)
@@ -164,7 +164,7 @@ const generatePDF = async () => {
         </h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-8">
+          <div className="space-y-10">
             <div>
               
               <div className="relative">
@@ -242,7 +242,7 @@ const generatePDF = async () => {
             </div>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-10">
             <div className="relative">
               <input 
                 type="text" 

@@ -14,7 +14,7 @@ const UserOption = () => {;
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex flex-col items-center justify-center p-4">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-6xl font-bold text-purpleColor animate-bounce mb-4">
-            Katlicherra Central School
+          Katlicherra Central School
         </h1>
         <p className="text-black-300 max-w-2xl mx-auto animate-fade-in">
           Welcome to Katlicherra Central School - Your comprehensive educational platform. Choose

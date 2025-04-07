@@ -49,9 +49,7 @@ const TeachersStudentLeaderBoard = () => {
         response.data.forEach(item => {
         fetchStudentData(item.student);
         });
-        setToastMessage(response.message);
-        setToastIcon("right");
-        setShowToast(true);
+      
       } else {
         setToastMessage(response.message);
         setToastIcon("wrong");

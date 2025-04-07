@@ -1,5 +1,5 @@
 import React from "react";
-import { Trash2, PenSquare } from "lucide-react";
+import { Trash2, PenSquare, Info } from "lucide-react";
 
 const Table = ({
   columns,
@@ -29,6 +29,15 @@ const Table = ({
             {columns?.map((column) => (
               <th key={column.field} className="px-6 py-4 text-left">
                 {column.headerName}
+                {
+                  column.note && (
+                    <div className="relative group inline-block">
+                      <Info className="inline-block ml-1 cursor-help" size={14}/>
+                      <div className="absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded p-2 z-10 -left-1/2 transform -translate-x-1/2 bottom-full mb-1 min-w-[300px]">
+                        {column.note}
+                      </div>
+                    </div>
+                  )                }
               </th>
             ))}
             {actions && <th className="px-6 py-4 text-left">Action</th>}

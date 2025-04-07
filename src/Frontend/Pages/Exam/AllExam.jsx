@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useForm } from 'react-hook-form';
 import Cookies from "js-cookie";
-import { Calendar, Upload, ArrowRight, Eye } from "lucide-react";
+import { Upload, ArrowRight, Eye,Trash } from "lucide-react";
 import axios from "axios";
 import {useSelector, useDispatch} from 'react-redux'
 import { toast } from 'react-toastify';
-import { oops } from "../../../assets/index";
 import { CreateExam, GetAllExams, UploadExamTimeTable } from "../../Route";
+import { DeleteExamAPI} from '../../../service/api';
+import Confirmation from "../../Components/Elements/ConfirmationModel"
+import { setConfirmRequest,setShowConfirmationModel,setStatus, setAddText } from "../../../Store/slice";
 
 const AllExams = () => {
   const token = Cookies.get("token");
@@ -15,6 +17,7 @@ const AllExams = () => {
   const [timeTableFile, setTimeTableFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showFailure, setShowFailure] = useState(false);
+  const [selectedExam,setSelectedExam] = useState(null);
   const [showToast, setShowToast] = useState({
     show: false,
     message: "",
@@ -23,7 +26,9 @@ const AllExams = () => {
   const [exams, setExams] = useState([]);
   const [isLoadingExams, setIsLoadingExams] = useState(false);
   const user = useSelector((state) => state.userData.user);
-
+  const dispatch = useDispatch()
+  const showConfirmation = useSelector((state) => state.userData.showConfirmationModel);
+  const confirmRequest = useSelector((state) => state.userData.confirmRequest);
   useEffect(() => {
     fetchExams();
     document.title = "Exam Details";
@@ -53,7 +58,7 @@ const AllExams = () => {
 
       setExams(response.data.data.exams || []);
     } catch (error) {
-      console.log(error);
+  
       setShowFailure(true);
       setShowToast({
         show: true,
@@ -93,12 +98,18 @@ const AllExams = () => {
       await fetchExams();
       return true;
     } catch (error) {
-      console.error("Timetable upload error:", error);
       setShowToast({
         show: true,
         message: "Failed to upload timetable",
         type: "wrong",
       });
+      if (error.status ===401)
+        {
+          Cookies.remove('token');
+          Cookies.remove('user');
+          window.location.href = '/user-options';
+
+      }
       return false;
     }
   };
@@ -137,13 +148,19 @@ const AllExams = () => {
       setValue('examDate', '');
       setTimeTableFile(null);
     } catch (error) {
-      console.error("Error:", error);
       setShowFailure(true);
       setShowToast({
         show: true,
         message: error.response?.data?.message || "An error occurred",
         type: "wrong",
       });
+      if (error.status ===401)
+        {
+          Cookies.remove('token');
+          Cookies.remove('user');
+          window.location.href = '/user-options';
+
+      }
       setTimeout(() => {
         setShowFailure(false);
       }, 2000);
@@ -173,17 +190,49 @@ const AllExams = () => {
     fileInput.click();
   };
 
+const handleDeleteExam =(exam)=>{
+setSelectedExam(exam)
+dispatch(setShowConfirmationModel(true));
+
+}
+
+const DeleteExam = async ()=>{
+ const response = await DeleteExamAPI(url, token, selectedExam?._id);
+ 
+      if (response.status ===200 ||response.status ===201 || response.status ===204 ) {
+        dispatch(setStatus("success"))
+        dispatch(setAddText(` ${selectedExam?.name} deleted successfully`))
+        fetchExams();
+      } else {
+        dispatch(setStatus("error"))
+        dispatch(setAddText(response.message))
+  
+
+        if(response.status ===401)
+        {
+          Cookies.remove('token');
+          Cookies.remove('user');
+          window.location.href = '/user-options';
+          
+        }
+      }
+      setTimeout(() => {
+        dispatch(setStatus(''));
+        dispatch(setAddText(''));
+        dispatch(setShowConfirmationModel(false));
+      }, 3000);
+      dispatch(setConfirmRequest(false))
+  }
+
+useEffect( ()=>{
+  if(confirmRequest)
+    {
+    DeleteExam()
+    }
+},[confirmRequest])
+
   return (
     <div className="min-h-screen sm:px-16 px-6 sm:py-16 py-10">
-      {showFailure && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <img
-            src={oops}
-            alt="Failure"
-            className="max-w-[200px]"
-          />
-        </div>
-      )}
 
       { user?.role==='principal'&&(
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-4 md:p-6 mb-[64px]">
@@ -196,7 +245,7 @@ const AllExams = () => {
                 <input
                   id="examName"
                   type="text"
-                  className="w-full px-4 py-2 border-2 bg-transparent border-black-200 text-black-200 rounded-md shadow-sm focus:outline   transition-all peer placeholder-transparent"
+                  className="w-full px-4 py-2 border-2 bg-transparent border-black-200 text-gray-600 rounded-md shadow-sm focus:outline   transition-all peer placeholder-transparent"
                   placeholder="Exam Name"
                   {...register('examName', { required: true })}
                 />
@@ -284,7 +333,7 @@ const AllExams = () => {
 
               {timeTableFile && (
                 <div className="mt-4 w-full">
-                  <p className="text-sm text-black-200 truncate text-center mb-3">
+                  <p className="text-sm text-gray-600 truncate text-center mb-3">
                     Selected: {timeTableFile.name}
                   </p>
                 </div>
@@ -294,6 +343,31 @@ const AllExams = () => {
           </div>
         </div>
       </div>
+      )}
+
+{showConfirmation && (
+        <div
+          className={`
+            fixed inset-0 flex items-center justify-center 
+            bg-black bg-opacity-50 z-50 
+            ${
+              showConfirmation
+                ? "opacity-100 visible"
+                : "opacity-0 invisible pointer-events-none"
+            }
+            transition-all duration-300 ease-in-out
+          `}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              dispatch(setShowConfirmationModel(false))
+              setSelectedExam(null);
+            }
+          }}
+        >
+          <Confirmation 
+            message={`Are you sure you want to delete ${selectedExam?.name} exam? This action cannot be undone.`}
+            note=""/>
+        </div>
       )}
 
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-4 md:p-6">
@@ -349,9 +423,9 @@ const AllExams = () => {
                       {new Date(exam.date).toLocaleDateString('en-GB')}
                     </td>
                     <td className="px-6 py-4 subtitle-2">
-                      {exam.timeTableUrl ? (
+                      {exam?.timeTableUrl&&(
                         <a
-                          href={exam.timeTableUrl}
+                          href={exam?.timeTableUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -360,7 +434,7 @@ const AllExams = () => {
                             className="text-primaryBlue cursor-pointer"
                           />
                         </a>
-                      ) : (
+                      )  }
                         <button
                           onClick={() => handleFileUploadForExam(exam._id)}
                           className="text-primaryBlue hover:text-blue-700"
@@ -368,11 +442,12 @@ const AllExams = () => {
                         >
                           <Upload className="h-5 w-5" />
                         </button>
-                      )}
+                     
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button className="text-primaryBlue mr-3">View</button>
-                      <button className="text-danger">Delete</button>
+                      <button className="text-danger" onClick={() => handleDeleteExam(exam)}>
+                        <Trash size={20} className="cursor-pointer" />
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -381,6 +456,7 @@ const AllExams = () => {
           </table>
         </div>
       </div>
+
     </div>
   );
 };

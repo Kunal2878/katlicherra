@@ -13,7 +13,7 @@ import Toast from "../../Components/Toast";
 import { useSelector, useDispatch } from "react-redux";
 import { setTeacherData } from "../../../Store/slice";
 import { GetTeachers, AddTransactionAPI } from '../../../service/api';
-import SelectDropdown from "../../Components/Elements/SelectDropdown"; 
+import SelectDropdown from "../../Components/Elements/SelectDropDown"; 
 import Input from "../../Components/Elements/Input"; 
 
 const AddTransactions = () => {

@@ -66,6 +66,9 @@ const StudentAttendance = (StudentData) => {
            attendanceRecord.status === 'absent' ? 'bg-red-200 hover:bg-red-300' : '';
   };
 
+
+
+  
   return (
     <div className="p-4 md:p-8 min-h-screen bg-gray-50">
       {showToast && (

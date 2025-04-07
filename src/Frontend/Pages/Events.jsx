@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { X, Plus, Loader } from "lucide-react";
+import { setEventData, setAnnouncementData,setConfirmRequest,setShowConfirmationModel,setStatus, setAddText,setEventsChanged } from "../../Store/slice";
 import { useSelector, useDispatch } from "react-redux";
-import { setEventData, setAnnouncementData } from "../../Store/slice";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { CreateEventAPI, CreateAnnouncementAPI, DeleteEventAPI, DeleteAnnouncementAPI, GetAllEventsAPI, GetAllAnnouncementsAPI } from '../../service/api';
+import Confirmation from "../Components/Elements/ConfirmationModel"
+import EventFormModal from './CreateEvent'
+import AnnouncementFormModal from './CreateAnnouncement'
 
 const Events = () => {
   const token = Cookies.get("token");
@@ -15,6 +18,9 @@ const Events = () => {
   const events = useSelector((state) => state.userData.EventData);
   const announcements = useSelector((state) => state.userData.AnnouncementData);
   const user = useSelector((state) => state.userData.user);
+  const eventsChanged = useSelector((state) => state.userData.eventsChanged);
+  const showConfirmation = useSelector((state) => state.userData.showConfirmationModel);
+  const confirmRequest = useSelector((state) => state.userData.confirmRequest);
   
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [selectedAnnouncements, setSelectedAnnouncements] = useState([]);
@@ -25,6 +31,7 @@ const Events = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showEventForm, setShowEventForm] = useState(false);
   const [showAnnouncementForm, setShowAnnouncementForm] = useState(false);
+  const [deleteType, setDeleteType] = useState('')
 
   const { 
     register: registerEvent, 
@@ -77,14 +84,20 @@ const Events = () => {
       const response = await GetAllEventsAPI(url, token);
       if (response.status === 200 || response.status === 204 || response.status === 201) {
         dispatch(setEventData(response.data.events));
-        setToastMessage(response.message);
-        setToastType("success");
-        setShowToast(true);
+     
 
       } else {
         setToastMessage(response.message);
         setToastType("error");
         setShowToast(true);
+
+        if (response.status ===401)
+          {
+            Cookies.remove('token');
+            Cookies.remove('user');
+            window.location.href = '/user-options';
+
+        }
       }
 
 
@@ -97,63 +110,23 @@ const Events = () => {
     const response = await GetAllAnnouncementsAPI(url, token);
     if (response.status === 200 || response.status === 204 || response.status === 201) {
       dispatch(setAnnouncementData(response.data.announcements));
-      setToastMessage(response.message);
-      setToastType("success");
-      setShowToast(true);
+     
     } else {
       setToastMessage(response.message);
       setToastType("error");
       setShowToast(true);
+      if (response.status === 401)
+        {
+          Cookies.remove('token');
+          Cookies.remove('user');
+          window.location.href = '/user-options';
+
+      }
     }
     setIsLoading(false);
   };
 
-  const onEventSubmit = async (data) => {
-    setIsLoading(true);
-    try {
-      const response = await CreateEventAPI(url, data, token);
-      if (response.status === 200 || response.status === 201 || response.status === 204) {
-        await fetchEvents();
-        resetEvent();
-        setToastMessage("Event created successfully");
-        setToastType("success");
-        setShowEventForm(false);
-      } else {
-        setToastMessage(response.message);
-        setToastType("error");
-      }
-    } catch (error) {
-      setToastMessage("Failed to create event");
-      setToastType("error");
-    } finally {
-      setShowToast(true);
-      setIsLoading(false);
-    }
-  };
-
-  const onAnnouncementSubmit = async (data) => {
-    setIsLoading(true);
-    try {
-      const response = await CreateAnnouncementAPI(url, data, token);
-      if (response.status === 200 || response.status === 201 || response.status === 204) {
-        await fetchAnnouncements();
-        resetAnnouncement();
-        setToastMessage("Announcement created successfully");
-        setToastType("success");
-        setShowAnnouncementForm(false);
-      } else {
-        setToastMessage(response.message);
-        setToastType("error");
-      }
-    } catch (error) {
-      setToastMessage("Failed to create announcement");
-      setToastType("error");
-    } finally {
-      setShowToast(true);
-      setIsLoading(false);
-    }
-  };
-
+ 
   const handleEventSelection = (eventId) => {
     setSelectedEvents((prev) =>
       prev.includes(eventId)
@@ -171,51 +144,107 @@ const Events = () => {
   };
 
   const handleDeleteEvents = async () => {
-    if (selectedEvents.length === 0) return;
-    setIsLoading(true);
-    try {
-      const response = await DeleteEventAPI(url, { eventIds: selectedEvents }, token);
-      if (response.status === 200 || response.status === 201 || response.status === 204) {
-        await fetchEvents();
-        setSelectedEvents([]);
-        setToastMessage("Events deleted successfully");
-        setToastType("success");
-      } else {
-        setToastMessage(response.message);
-        setToastType("error");
-      }
-    } catch (error) {
-      setToastMessage("Failed to delete events");
-      setToastType("error");
-    } finally {
-      setShowToast(true);
-      setIsLoading(false);
-    }
+setDeleteType('events')
+dispatch(setShowConfirmationModel(true));
   };
 
-  const handleDeleteAnnouncements = async () => {
-    if (selectedAnnouncements.length === 0) return;
-    setIsLoading(true);
-    try {
-      const response = await DeleteAnnouncementAPI(url, { announcementIds: selectedAnnouncements }, token);
-      if (response.status === 200 || response.status === 201 || response.status === 204) {
-        await fetchAnnouncements();
-        setSelectedAnnouncements([]);
-        setToastMessage("Announcements deleted successfully");
-        setToastType("success");
-      } else {
-        setToastMessage(response.message);
-        setToastType("error");
+const DeleteEvents = async()=>{
+  if (selectedEvents.length === 0) return;
+ 
+    const response = await DeleteEventAPI(url, { eventIds: selectedEvents }, token);
+
+    if (response.status ===200 ||response.status ===201 || response.status ===204 ) {
+      dispatch(setStatus("success"))
+      dispatch(setAddText(` Events deleted successfully`))
+      await fetchEvents();
+          } else {
+            dispatch(setStatus("error"))
+            dispatch(setAddText(response.message))
+      
+    
+            if(response.status ===401 && response.message ==="Invalid token")
+            {
+              Cookies.remove('token');
+              Cookies.remove('user');
+              window.location.href = '/user-options';
+              
+            }
+          }
+          setTimeout(() => {
+            dispatch(setStatus(''));
+            dispatch(setAddText(''));
+            dispatch(setShowConfirmationModel(false));
+          }, 3000);
+          dispatch(setConfirmRequest(false))
+}
+
+useEffect( ()=>{
+  if(confirmRequest)
+    {
+      if(deleteType==='events'){
+        DeleteEvents()
       }
-    } catch (error) {
-      setToastMessage("Failed to delete announcements");
-      setToastType("error");
-    } finally {
-      setShowToast(true);
-      setIsLoading(false);
+      else if(deleteType==='announcements'){
+        DeleteAnnouncements()
+      }
     }
+},[confirmRequest])
+
+
+  const handleDeleteAnnouncements = async () => {
+    setDeleteType('announcements')
+    dispatch(setShowConfirmationModel(true));
+    
   };
   
+const DeleteAnnouncements = async ()=>{
+  if (selectedAnnouncements.length === 0) return;
+
+ 
+    const response = await DeleteAnnouncementAPI(url, { announcementIds: selectedAnnouncements }, token);
+   
+    if (response.status ===200 ||response.status ===201 || response.status ===204 ) {
+      dispatch(setStatus("success"))
+      dispatch(setAddText(` Announcements deleted successfully`))
+      await fetchAnnouncements();
+          } else {
+            dispatch(setStatus("error"))
+            dispatch(setAddText(response.message))
+      
+    
+               
+            if(response.status ===401 && response.message ==="Invalid token")
+            {
+              Cookies.remove('token');
+              Cookies.remove('user');
+              window.location.href = '/user-options';
+              
+            }
+          }
+          setTimeout(() => {
+            dispatch(setStatus(''));
+            dispatch(setAddText(''));
+            dispatch(setShowConfirmationModel(false));
+          }, 3000);
+          dispatch(setConfirmRequest(false))
+   
+}
+
+useEffect(() => {
+  if(eventsChanged ==='events'){
+    fetchEvents();
+    dispatch(setEventsChanged(''))
+
+  }
+  else if(eventsChanged ==='announcements')
+  {
+    fetchAnnouncements(); 
+    dispatch(setEventsChanged(''))
+
+  }
+},[eventsChanged]);
+
+
 if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -225,194 +254,129 @@ if (isLoading) {
       </div>
     );
   }
-  // Event Form Modal
-  const EventFormModal = () => (
-    <div
-      className={`
-        fixed inset-0 flex items-center justify-center 
-        bg-black bg-opacity-50 z-50 
-        ${
-          showEventForm
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none"
-        }
-        transition-all duration-300 ease-in-out
-      `}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setShowEventForm(false);
-        }
-      }}
-    >
-      <div
-        className={`
-          relative rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto 
-          bg-white p-6 custom-scrollbar
-          ${
-            showEventForm
-              ? "opacity-100 scale-100 translate-y-0"
-              : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
-          }
-          transition-all duration-300 ease-in-out
-          transform origin-center
-        `}
-      >
-        <button
-          onClick={() => setShowEventForm(false)}
-          className="absolute top-6 right-6 p-2 bg-white rounded-full text-black-300 hover:scale-110"
-        >
-          <X size={24} />
-        </button>
-        <h2 className="h2 mb-[32px] text-left">Create Event</h2>
 
-        {/* Event Form with React Hook Form */}
-        <form onSubmit={handleSubmitEvent(onEventSubmit)} className="mb-[16px]">
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Event Title"
-              className={`w-full p-2 rounded bg-transparent border-2 border-black-200 text-black-300 focus:outline ${eventErrors.title ? 'border-red-500' : ''}`}
-              {...registerEvent("title", { required: "Title is required" })}
-            />
-            {eventErrors.title && <p className="text-red-500 text-sm mt-1">{eventErrors.title.message}</p>}
-          </div>
-          
-          <div className="mb-4">
-            <textarea
-              placeholder="Event Description"
-              className={`w-full h-32 p-2 border-2 rounded bg-transparent border-black-200 text-black-300 focus:outline resize-none ${eventErrors.content ? 'border-red-500' : ''}`}
-              {...registerEvent("content", { required: "Description is required" })}
-            />
-            {eventErrors.content && <p className="text-red-500 text-sm mt-1">{eventErrors.content.message}</p>}
-          </div>
-          
-          <div className="mb-4">
-            <input
-              type="date"
-              placeholder="Date"
-              className={`w-full p-2 border-2 rounded bg-transparent border-black-200 text-black-300 focus:outline [&::-webkit-calendar-picker-indicator]:text-black [&::-webkit-calendar-picker-indicator]:filter-none ${eventErrors.eventDate ? 'border-red-500' : ''}`}
-              {...registerEvent("eventDate", { required: "Date is required" })}
-            />
-            {eventErrors.eventDate && <p className="text-red-500 text-sm mt-1">{eventErrors.eventDate.message}</p>}
-          </div>          
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Location"
-              className={`w-full p-2 border-2 rounded bg-transparent border-black-200 text-black-300 focus:outline ${eventErrors.venue ? 'border-red-500' : ''}`}
-              {...registerEvent("venue", { required: "Location is required" })}
-            />
-            {eventErrors.venue && <p className="text-red-500 text-sm mt-1">{eventErrors.venue.message}</p>}
-          </div>
-          
-          <button
-            type="submit"
-            className="w-full bg-success-500 text-white p-2 rounded flex items-center justify-center hover:scale-105 transition duration-200"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-            ) : (
-              "Create Event"
-            )}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-
-  // Announcement Form Modal
-  const AnnouncementFormModal = () => (
-    <div
-      className={`
-        fixed inset-0 flex items-center justify-center 
-        bg-black bg-opacity-50 z-50 
-        ${
-          showAnnouncementForm
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none"
-        }
-        transition-all duration-300 ease-in-out
-      `}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setShowAnnouncementForm(false);
-        }
-      }}
-    >
-      <div
-        className={`
-          relative rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto 
-          bg-white p-6 custom-scrollbar
-          ${
-            showAnnouncementForm
-              ? "opacity-100 scale-100 translate-y-0"
-              : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
-          }
-          transition-all duration-300 ease-in-out
-          transform origin-center
-        `}
-      >
-        <button
-          onClick={() => setShowAnnouncementForm(false)}
-          className="absolute top-6 right-6 p-2 bg-white rounded-full text-black-300 hover:scale-110"
-        >
-          <X size={24} />
-        </button>
-        <h2 className="h2 mb-[32px] text-left">Create Announcement</h2>
-
-        {/* Announcement Form with React Hook Form */}
-        <form onSubmit={handleSubmitAnnouncement(onAnnouncementSubmit)} className="space-y-[16px]">
-          <div className="text-left space-y-2">
-            <label htmlFor="title" className="h3 cursor-pointer">
-              Title
-            </label>
-            <input
-              id="title"
-              placeholder="Announcement Title"
-              className={`w-full p-2 border-2 rounded bg-transparent border-black-100 focus:outline focus:outline-2 focus:outline-black-200 text-black-300 ${announcementErrors.title ? 'border-red-500' : ''}`}
-              {...registerAnnouncement("title", { required: "Title is required" })}
-            />
-            {announcementErrors.title && <p className="text-red-500 text-sm mt-1">{announcementErrors.title.message}</p>}
-          </div>
-          
-          <div className="text-left space-y-2">
-            <label htmlFor="description" className="h3 cursor-pointer">
-              Description
-            </label>
-            <textarea
-              id="description"
-              placeholder="Announcement Description"
-              className={`w-full h-32 p-2 border-2 rounded bg-transparent border-black-100 focus:outline focus:outline-2 focus:outline-black-200 text-black-300 resize-none ${announcementErrors.description ? 'border-red-500' : ''}`}
-              {...registerAnnouncement("content", { required: "Description is required" })}
-            />
-            {announcementErrors.description && <p className="text-red-500 text-sm mt-1">{announcementErrors.description.message}</p>}
-          </div>
-          
-          <button
-            type="submit"
-            className="mt-[16px] w-full bg-success-500 text-white p-2 rounded  flex items-center justify-center hover:scale-105 transition-all duration-200"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-            ) : (
-              "Create Announcement"
-            )}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+  
 
   return (
     <div className="p-4 relative sm:px-16 px-6 sm:py-16 py-10">
      
 
       {/* Modals */}
-      <EventFormModal />
-      <AnnouncementFormModal />
+      <div
+        className={`
+          fixed inset-0 flex items-center justify-center 
+          bg-black bg-opacity-50 z-50 
+          ${
+            showEventForm
+              ? "opacity-100 visible"
+              : "opacity-0 invisible pointer-events-none"
+          }
+          transition-all duration-300 ease-in-out
+        `}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setShowEventForm(false);
+          }
+        }}
+      >
+        {showEventForm && (
+          <div
+            className={`
+              relative rounded-xl w-auto max-h-[90vh] overflow-y-auto 
+              bg-white
+              custom-scrollbar
+              ${
+                showEventForm
+                  ? "opacity-100 scale-100 translate-y-0"
+                  : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
+              }
+              transition-all duration-300 ease-in-out
+              transform origin-center
+            `}
+          >
+            <button
+                onClick={() => setShowEventForm(false)}
+              className="absolute top-6 right-4 p-2 z-100 rounded-full text-black-300 transition-colors duration-200 transform hover:scale-110"
+            >
+              <X size={24} />
+            </button>
+             <EventFormModal onClose={() => setShowEventForm(false)} />
+          </div>
+        )}
+      </div>
+      <div
+        className={`
+          fixed inset-0 flex items-center justify-center 
+          bg-black bg-opacity-50 z-50 
+          ${
+            showAnnouncementForm
+              ? "opacity-100 visible"
+              : "opacity-0 invisible pointer-events-none"
+          }
+          transition-all duration-300 ease-in-out
+        `}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setShowAnnouncementForm(false);
+          }
+        }}
+      >
+        {showAnnouncementForm && (
+          <div
+            className={`
+              relative rounded-xl w-auto max-h-[90vh] overflow-y-auto 
+              bg-white
+              custom-scrollbar
+              ${
+                showAnnouncementForm
+                  ? "opacity-100 scale-100 translate-y-0"
+                  : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
+              }
+              transition-all duration-300 ease-in-out
+              transform origin-center
+            `}
+          >
+            <button
+                onClick={() => setShowAnnouncementForm(false)}
+              className="absolute top-6 right-4 p-2 z-100 rounded-full text-black-300 transition-colors duration-200 transform hover:scale-110 mb-4"
+            >
+              <X size={24} />
+            </button>
+             <AnnouncementFormModal onClose={() => setShowAnnouncementForm(false)} />
+          </div>
+        )}
+      </div>
+     
+
+
       
+      
+{showConfirmation && (
+        <div
+          className={`
+            fixed inset-0 flex items-center justify-center 
+            bg-black bg-opacity-50 z-50 
+            ${
+              showConfirmation
+                ? "opacity-100 visible"
+                : "opacity-0 invisible pointer-events-none"
+            }
+            transition-all duration-300 ease-in-out
+          `}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              dispatch(setShowConfirmationModel(false))
+              setSelectedExam(null);
+            }
+          }}
+        >
+          <Confirmation 
+            message={`Are you sure you want to delete the ${deleteType}? This action cannot be undone.`}
+            note=""/>
+        </div>
+      )}
+
+
       {/* Tabs */}
       <div className="flex mb-4 border-b z-10">
         <button
@@ -449,7 +413,7 @@ if (isLoading) {
         >
           {/* Header with Add Button and Delete Button */}
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-black-300">Events</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Events</h2>
             <div className="flex items-center gap-4">
               {selectedEvents.length > 0 && (
                 <button
@@ -535,7 +499,7 @@ if (isLoading) {
         >
           {/* Header with Add Button and Delete Button */}
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-black-300">Announcements</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Announcements</h2>
             <div className="flex items-center gap-4">
               {selectedAnnouncements.length > 0 && (
                 <button

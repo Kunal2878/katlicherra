@@ -2,20 +2,21 @@
   import TeacherProfilePage from './ViewTeacherProfile';
 //   import ExamMarkDetails from './ViewExamDetails';
   import TeacherAttendance from './ViewAttendanceHistory';
-
+import UnderMaintenance from '../../UnderMaintence'
+import TeacherFee from './ViewTeacherFeeHistory'
   const ViewTeacherDetails = (TeacherData) => {
-    console.log(TeacherData)
     const [selectedTab, setSelectedTab] = useState(0);
 
     const tabs = [
       { label: 'Teacher Profile', component: <TeacherProfilePage TeacherData ={TeacherData} /> },
     //   { label: 'Exam Details', component: <ExamMarkDetails TeacherData ={TeacherData}/> },
-      { label: 'Attendance', component: <TeacherAttendance  TeacherData ={TeacherData}/> }
+      { label: 'Attendance', component: <TeacherAttendance  TeacherData ={TeacherData}/> },
+      { label: 'Teacher Fee History', component: <TeacherFee TeacherData ={TeacherData}/> }
     ];
 
     return (
       <div className="w-full p-4 mt-6">
-        <div className="border-b border-gray-200">
+        <div className="border-b border-gray-200 overflow-x-auto">
           <nav className="flex space-x-4">
             {tabs.map((tab, index) => (
               <button

@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { Calendar, Loader } from 'lucide-react';
 import axios from 'axios';
 import Toast from '../../../Components/Toast';
-import Cokkies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 const TeacherAttendance = (TeacherData) => {
 const url = import.meta.env.VITE_API_BASE_URL;
-const token =Cokkies.get("token")
+const token =Cookies.get("token")
   const [loading, setLoading] = useState(true);
   const [attendance, setAttendance] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
@@ -172,7 +172,7 @@ const token =Cokkies.get("token")
           <div className="w-full md:w-auto flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
             <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
               <div className="flex flex-col">
-                <label className="text-left text-xs text-black-200 mb-1">Start Date</label>
+                <label className="text-left text-xs text-gray-600 mb-1">Start Date</label>
                 <input
                   type="date"
                   value={startDate}
@@ -182,7 +182,7 @@ const token =Cokkies.get("token")
               </div>
 
               <div className="flex flex-col">
-                <label className=" text-left text-xs text-black-200 mb-1">End Date</label>
+                <label className=" text-left text-xs text-gray-600 mb-1">End Date</label>
                 <input
                   type="date"
                   value={endDate}
@@ -191,7 +191,7 @@ const token =Cokkies.get("token")
                 />
               </div>
               <div className="flex flex-col">
-              <label className=" text-left text-xs text-black-200 mb-1">Month</label>
+              <label className=" text-left text-xs text-gray-600 mb-1">Month</label>
               <select
             className="text-xs md:text-base px-1 py-1 md:px-4 md:py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 bg-primary-300 text-black-300 border-lamaSkyLight"
             value={selectedMonth}

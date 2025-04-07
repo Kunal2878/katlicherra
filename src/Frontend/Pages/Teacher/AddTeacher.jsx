@@ -62,6 +62,15 @@ const AddTeachers = () => {
       setShowToast(true);
       setToastMessage(response.message);
       setToastType("error");
+
+    
+
+         if (response.status === 401) {  
+                Cookies.remove('user');
+                Cookies.remove('token');
+                window.location.href = '/user-options';                      
+              }
+      
     }
     setLoading(false);
     reset();
@@ -77,7 +86,7 @@ const AddTeachers = () => {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mt-[32px] space-y-8 mb-[16px]"
+          className="mt-[32px] space-y-10 mb-[16px]"
         >
           <Input
             id="fullName"

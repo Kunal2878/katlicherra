@@ -25,7 +25,7 @@ const Select = ({
         onBlur={onBlur}
         disabled={disabled}
         className={`w-full px-3 py-2 border-2 bg-transparent rounded-md transition-all ${
-          error ? 'border-danger text-danger' : 'border-black-300 text-black-200'
+          error ? 'border-danger text-danger' : 'border-black-300 text-gray-600'
         } focus:outline`}
         required={required}
       >

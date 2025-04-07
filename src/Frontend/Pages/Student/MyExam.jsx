@@ -62,11 +62,11 @@
             >
               <h2 className="text-xl font-semibold mb-4">{exam.title}</h2>
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-black-200">
+                <div className="flex items-center gap-2 text-gray-600">
                   <Calendar className="w-5 h-5" />
                   <span>{exam.date}</span>
                 </div>
-                <div className="flex items-center gap-2 text-black-200">
+                <div className="flex items-center gap-2 text-gray-600">
                   <Clock className="w-5 h-5" />
                   <span>{exam.duration} minutes</span>
                 </div>

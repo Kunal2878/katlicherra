@@ -6,12 +6,12 @@ import {
   GraduationCap,
   Plus,
   X,
+  PenSquare,
   Eye,
 } from "lucide-react";
 import UpdateStudents from "../../Pages/Student/UpdateStudent";
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
-import { oops } from "../../../assets/index";
 import { setStudentData, setCurrentPage,setIsStudentUpdate } from "../../../Store/slice";
 import { GetStudents } from '../../../service/api';
 import Table from "../Elements/Table";
@@ -22,7 +22,6 @@ const PromoteStudents = () => {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showUpdateStudent, setShowUpdateStudent] = useState(false);
-  const [showViewStudent, setShowViewStudent] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [paginationData, setPaginationData] = useState({
     currentPage: 1,
@@ -55,17 +54,11 @@ const PromoteStudents = () => {
           totalPages: response.data.pagination.totalPages,
           totalItemsPerPage: response.data.pagination.studentsPerPage ||10
         });
-         toast.success(response.message,  {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                  });
+      
       } 
       
       else {
+        dispatch(setStudentData([]));
          toast.error(response.message , {
                     position: "top-right",
                     autoClose: 2000,
@@ -148,9 +141,9 @@ fetchStudents();
         <div className="flex items-center gap-3">
           <button 
             onClick={() => handlePromoteStudent(row)} 
-            className="w-20 h-10 bg-blue-600 hover:bg-blue-400 text-white rounded-lg overflow-hidden flex flex-row justify-center items-center"
+            className="w-10 h-10 hover:text-purpleColor  rounded-lg overflow-hidden flex flex-row justify-center items-center"
           >
-            Promote
+            <PenSquare size={20} />
           </button>
         </div>
       ),
@@ -226,32 +219,18 @@ fetchStudents();
       
       {/* Header */}
       <div className="flex flex-col md:flex-row text-black justify-between items-start md:items-center mb-[32px] p-2">
-        <div className="mb-4 md:mb-0">
-          <h2 className="h2 mb-2">Student Promotion</h2>
-          <div className="flex items-center subtitle-2">
-            <span className="">Students Details / </span>
-            <span>Student Promotion</span>
+        <div className="mb-4 md:mb-0 text-left">
+          <h2 className="h2 mb-2 text-left">Student Promotion</h2>
+          <div className="flex items-center subtitle-2 text-left">
+            <span className="text-left">Students Details / </span>
+            <span className="text-left">Student Promotion</span>
           </div>
         </div>
       </div>
 
       {/* Filters */}
       <div className="bg-white p-2 rounded-md shadow-lg">
-        <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mt-[16px] mb-[32px] bg-white">
-          <div className="relative flex-1 max-w-md text-black p-2 ml-4">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2"
-              size={20}
-            />
-            <input
-              type="text"
-              placeholder="Search by name"
-              value={searchQuery}
-              onChange={handleSearch}
-              className="h-11 w-full pl-10 pr-4 py-2 border rounded-lg bg-lamaSkyLight text-black-300 transition-all duration-200"
-            />
-          </div>
-        </div>
+      
 
         {/* Table Component */}
         <Table
@@ -262,18 +241,7 @@ fetchStudents();
           extraClasses="m-4"
         />
       </div>
-    {students.length===0 && (
-         <div className="flex flex-col items-center justify-center mt-4 p-4 ">
-            
-         <p className="text-gray-500 text-lg mb-6">No Students available yet, be the first to create one</p>
 
-<img
-src={oops}
-alt="Failure"
-className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] lg:h-[350px]  rounded-lg"
-/>
-</div> 
-      )}
       {/* Pagination Component */}
       {paginationData.totalPages > 0 && (
         <Pagination

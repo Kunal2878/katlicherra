@@ -3,7 +3,7 @@ import { Loader, FileSpreadsheet, FileText } from 'lucide-react';
 import { GetExamsAPI } from '../../../service/api';
 import { useSelector } from "react-redux";
 import axios from 'axios';
-import Toast from '../../Components/Toast';
+import { toast } from 'react-toastify';
 import StudentMarksheet from '../../Pages/Student/ViewStudentsDetails/Marksheet';
 
 const ExamMarkDetails = (StudentData) => {
@@ -15,7 +15,7 @@ const ExamMarkDetails = (StudentData) => {
   const [exams, setExams] = useState([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-  const [toastIcon, setToastIcon] = useState("");
+  const [toastType, setToastType] = useState("");
   const [showMarksheet, setShowMarksheet] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
   const user = useSelector((state) => state.userData.user);
@@ -26,8 +26,6 @@ const ExamMarkDetails = (StudentData) => {
     setShowMarksheet(false);
     try {
       const response = await axios.get(`${url}mark/students/${user?._id}/exams/${examType}`);
-     
-
       setResults(response.data.data.data);
     } catch (err) {
       setError(err.response.data.message);
@@ -46,10 +44,13 @@ const ExamMarkDetails = (StudentData) => {
     const response = await GetExamsAPI(url);
     if (response.status === 200 || response.status === 201 || response.status === 204) {
       setExams(response.data.exams)
+      setShowToast(true);
+      setToastMessage(response.message ||'Exams fetched successfully');
+      setToastType('success');
     } else {
-      setToastMessage('Failed to fetch exams')
-      setToastIcon("wrong")
-      setShowToast(true)
+      setShowToast(true);
+      setToastMessage(response.message || 'Failed to fetch exams');
+      setToastType('error');
     }
   }
 
@@ -59,22 +60,24 @@ const ExamMarkDetails = (StudentData) => {
 
   useEffect(() => {
     if (showToast) {
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-      return () => clearTimeout(timer);
+      toast[toastType](toastMessage, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
-  }, [showToast]);
+  }, [showToast, toastMessage, toastType]);
 
   const toggleMarksheet = () => {
     setShowMarksheet(!showMarksheet);
   };
-
   return (
     <div className="w-full min-h-screen p-4 bg-gray-50">
       {showToast && (
         <div className="fixed top-4 right-4 z-50">
-          <Toast message={toastMessage} iconName={toastIcon} />
         </div>
       )}
 

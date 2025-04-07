@@ -98,11 +98,7 @@ const CustomCalendar = () => {
             onClick={() => handleDateClick(day)}
             className={`relative inline-block cursor-pointer ${isSelected(day) ? "font-medium" : ""}`}
           >
-            {isToday(day) && (
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 ">
-                <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-t-blue-500 border-l-transparent border-r-transparent"></div>
-              </div>
-            )}
+           
             <span className={`${isToday(day) ? "bg-blue-100 px-2 py-1 rounded-md text-blue-500 " : isSelected(day) ? "text-blue-500" : "text-black-300"} font-bold`}>
               {day}
             </span>

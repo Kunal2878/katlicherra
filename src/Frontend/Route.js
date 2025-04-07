@@ -1,6 +1,12 @@
     // Principal endpoints
     export const SignupPrincipal = 'principal/register'
     export const LoginPrincipal = 'principal/login'
+    export const Accept_RejectLeaveRequest = 'principal/accept-teachers-leave'
+    export const DeleteLeaveRequest = 'teacher/delete-teacher-leave'
+    export const GetAllLeaves = 'principal/get-teachers-leave'
+    export const AcceptRejectPayReq = 'principal/update-payment-request'
+    export const GetTeacherExpense = 'principal/get-teacher-expense'
+    
 
     // Teacher endpoints
     export const SignupTeacher = 'teacher/register'
@@ -13,6 +19,9 @@
     export const GetTeacherByID = 'teacher'
     export const PasswordChange = 'teacher/change-password'
     export const GetAllTeachers = 'teacher/all-teachers/no-pagination'
+    export const SendLeave = 'teacher/send-leave-request'
+    export const GetAllLeaveTeacher = 'teacher/get-all-leaves'
+    export const SendAdvPayReq = 'teacher/send-adv-pay-req'
     
 
     // Student endpoints
@@ -28,6 +37,8 @@
     export const AddStudentTransaction = 'student/fee-payment/pay-fee'
     export const GetClassFeeTransaction='student/fee-payment/history/class'
     export const GetStudentFeeTransaction ='student/fee-payment/history/student'
+    export const GetGenderRatio = "student/gender-ratio"
+    export const ImposeFine = "student/fee-payment/impose-fine"
     
 
     // Class endpoints
@@ -36,6 +47,7 @@
     export const GetStudentByClass = "student/getstudentbyclassid"
     export const UpdateClassDetails ='class/update-class'
     export const GetAllClasses = 'class/all-classes/no-pagination'
+    export const DeleteClass = 'class/delete-class'
     
     
 
@@ -51,6 +63,7 @@
 export const CreateExam = 'principal/create-exam'
 export const GetAllExams = 'principal/getallexams'
 export const UploadExamTimeTable = 'principal/upload-exam-timetable'
+export const DeleteExam = 'principal/delete-exam'
 
 // Events
 export const CreateEvent = 'event/create-event'

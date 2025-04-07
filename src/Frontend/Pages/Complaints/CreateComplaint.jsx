@@ -72,7 +72,7 @@
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-[32px] space-y-8 mb-[16px]"
+            className="mt-[32px] space-y-10 mb-[16px]"
           >
             <div className="mb-6 w-full">
               <div className="relative w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto">

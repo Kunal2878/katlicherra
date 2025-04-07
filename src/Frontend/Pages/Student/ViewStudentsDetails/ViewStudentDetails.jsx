@@ -2,6 +2,7 @@
   import StudentProfilePage from './ViewStudentProfile';
   import ExamMarkDetails from './ViewExamDetails';
   import StudentAttendance from './ViewAttendanceHistory';
+  import ViewStudentFees from './ViewStudentFeeHistory';
 
   const ViewStudentDetails = (StudentData) => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -9,18 +10,19 @@
     const tabs = [
       { label: 'Student Profile', component: <StudentProfilePage StudentData ={StudentData} /> },
       { label: 'Exam Details', component: <ExamMarkDetails StudentData ={StudentData}/> },
-      { label: 'Attendance', component: <StudentAttendance  StudentData ={StudentData}/> }
+      { label: 'Attendance', component: <StudentAttendance  StudentData ={StudentData}/> },
+      { label: 'Student Fee History', component: <ViewStudentFees  studentData ={StudentData?.studentData}/> }
     ];
-console.log(StudentData)
+
     return (
       <div className="w-full p-4 mt-6">
-        <div className="border-b border-gray-200">
+        <div className="border-b border-gray-200 overflow-x-auto">
           <nav className="flex space-x-4">
             {tabs.map((tab, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedTab(index)}
-                className={`px-4 py-2 text-sm font-medium transition-all duration-300 ease-in-out
+                className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 ease-in-out whitespace-nowrap
                   ${selectedTab === index 
                     ? 'text-blue-600 border-b-2 border-blue-600' 
                     : 'text-gray-500 hover:text-gray-700'}`}

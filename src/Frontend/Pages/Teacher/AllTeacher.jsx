@@ -15,7 +15,6 @@ import Table from "../../Components/Elements/Table";
 import Pagination from "../../Components/Elements/Pagination";
 import ViewTeacherDetails from './ViewTeacherDetails/ViewTeacherDetails';
 import { toast } from 'react-toastify';
-import { oops } from "../../../assets/index";
 const TeacherDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -67,9 +66,7 @@ const TeacherDetails = () => {
             totalPages: response.data.pagination.totalPages,
             totalItemsPerPage: response.data.pagination.teachersPerPage ||10,
           });
-          setShowToast(true);
-          setToastMessage(response.message);
-          setToastType("success");
+
         } else {
           setError(response.message);
           setShowFailure(true);
@@ -204,7 +201,7 @@ const TeacherDetails = () => {
           `}>
             <button
               onClick={() => setShowAddTeacher(false)}
-              className="absolute top-6 right-4 p-2 bg-white rounded-full text-black-300 hover:text-black-300 transition-colors duration-200 transform hover:scale-110"
+              className="absolute top-6 right-4 p-2 bg-white rounded-full text-black-300 hover:text-gray-800 transition-colors duration-200 transform hover:scale-110"
             >
               <X size={24} />
             </button>
@@ -237,7 +234,7 @@ const TeacherDetails = () => {
           `}>
             <button
               onClick={() => setShowViewTeacher(false)}
-              className="absolute top-6 right-4 p-2 bg-white rounded-full text-black-300 hover:text-black-300 transition-colors duration-200 transform hover:scale-110"
+              className="absolute top-6 right-4 p-2 bg-white rounded-full text-black-300 hover:text-gray-800 transition-colors duration-200 transform hover:scale-110"
             >
               <X size={24} />
             </button>
@@ -247,8 +244,6 @@ const TeacherDetails = () => {
       </div>
 
       <div className="bg-white rounded-lg shadow-lg p-4">
-        {/* Filters */}
-       
 
         {/* Table Component */}
         <Table
@@ -261,32 +256,18 @@ const TeacherDetails = () => {
           extraClasses="m-4"
         />
 
-        {teachers.length === 0 && (
-
-          <div className="flex flex-col items-center justify-center mt-4 p-4 ">
-            
-                        <p className="text-gray-500 text-lg mb-6">No teachers available yet, be the first to create one</p>
-
-          </div>        )}
-
-
-      </div>
-
-
-
-      {teachers.length === 0 && (
+{teachers.length === 0 && (
 
 <div className="flex flex-col items-center justify-center mt-4 p-4 ">
   
-           
-  
-  <img
-    src={oops}
-    alt="Failure"
-    className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] lg:h-[350px]  rounded-lg"
-  />
-</div>        
-)}
+              <p className="text-gray-500 text-lg mb-6">No teachers available yet, be the first to create one</p>
+
+</div>       
+ )}
+
+</div>
+
+
 
       {/* Pagination Component */}
       {paginationData.totalPages > 0 && (

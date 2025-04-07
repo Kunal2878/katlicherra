@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Mail, Lock, User, Eye, EyeOff, CalendarDays } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { education, katlicherra, onboarding,oops} from "../../../assets";
+import { education, onboarding} from "../../../assets";
 import Input from '../../Components/Elements/Input';
 import PasswordInput from '../../Components/Elements/PasswordInput';
 import { RegisterPrincipalAccount } from '../../../service/api';
@@ -96,8 +96,7 @@ const RegisterPrincipal = () => {
                   Welcome 👋
                 </h1>
                 <h2 className="mt-6 text-black">
-                  Get Started with <span className="text-purpleColor">Katlicherra Central School</span>
-                 
+                  Get Started with <span className="text-purpleColor"> Katlicherra Central School </span>
                 </h2>
                 <p className="text-black-300">
                   <i>

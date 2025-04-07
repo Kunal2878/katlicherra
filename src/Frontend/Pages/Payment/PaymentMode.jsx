@@ -35,7 +35,7 @@ const PaymentMethodSelector = () => {
               <input 
                 type="text" 
                 placeholder="1234 5678 9012 3456"
-                className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-black-200 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
             <div className="flex space-x-4">
@@ -44,7 +44,7 @@ const PaymentMethodSelector = () => {
                 <input 
                   type="text" 
                   placeholder="MM/YY"
-                  className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-black-200 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
               <div className="w-1/2">
@@ -52,7 +52,7 @@ const PaymentMethodSelector = () => {
                 <input 
                   type="text" 
                   placeholder="123"
-                  className="mt-1 block w-full px-3 py-2  bg-transparent border-2 border-black-100 text-black-200 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-3 py-2  bg-transparent border-2 border-black-100 text-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
             </div>
@@ -66,7 +66,7 @@ const PaymentMethodSelector = () => {
               <input 
                 type="text" 
                 placeholder="yourname@upi"
-                className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-black-200 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
           </div>
@@ -77,7 +77,7 @@ const PaymentMethodSelector = () => {
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700">Select Wallet</label>
               <select 
-                className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-black-200 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 bg-transparent border-2 border-black-100 text-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               >
                 <option>Paytm</option>
                 <option>Google Pay</option>
@@ -103,7 +103,7 @@ const PaymentMethodSelector = () => {
                 flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300
                 ${activeTab === tab.id 
                   ? 'bg-indigo-500 text-white shadow-lg' 
-                  : 'text-black-200 hover:bg-gray-200'}
+                  : 'text-gray-600 hover:bg-gray-200'}
               `}
             >
               {tab.icon}

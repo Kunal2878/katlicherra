@@ -11,7 +11,7 @@
   import { GetAllClasses, GetSubjectByClass,UpdateStudent } from "../../Route";
   import { GetStudents } from '../../../service/api';
   import Input from "../../Components/Elements/Input";
-  import SelectDropdown from "../../Components/Elements/SelectDropdown";
+  import SelectDropdown from "../../Components/Elements/SelectDropDown";
 
   
   const UpdateStudents = (StudentData) => {
@@ -56,14 +56,7 @@
           },
         });
         setClassData(response.data.data.classes);
-        toast.success(response.data.message || "Classes data fetched Successfully", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+     
       } 
       
       
@@ -91,14 +84,7 @@
        
         setSubjectsData(response.data);
 
-        toast.success(response.data.message || "Subjects fetched Successfully", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+       
       } catch (error) {
         console.error("Error fetching subjects:", error);
               toast.error(error.response.data.message || "Error fetching subjects:", {
@@ -173,7 +159,6 @@
           reset();
         }
       } catch (error) {
-        console.error(error);
         toast.error(error.response.data.message || "Update failed", {
           position: "top-right",
           autoClose: 3000,
@@ -183,6 +168,12 @@
           draggable: true,
         });
         reset();
+        if (error.status === 401) {  
+          Cookies.remove('user');
+          Cookies.remove('token');
+          window.location.href = '/user-options';                      
+        }
+
       } 
       
       finally {
@@ -202,7 +193,7 @@
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-8 space-y-8 mb-4"
+            className="mt-8 space-y-10 mb-4"
           >
             <Input
               id="name"

@@ -17,7 +17,6 @@
   import { setClassData } from "../../../Store/slice";
   import { GetAllClassesAPI,GetSubjectByClassAPI } from '../../../service/api';
   import { useSelector, useDispatch } from "react-redux";
-  import {oops} from '../../../assets/index'
   const AllSubjects = () => {
     const url = import.meta.env.VITE_API_BASE_URL;
     const token = Cookies.get("token");
@@ -62,9 +61,6 @@
           if (response.data.classes?.length > 0) {
             setSelectedClassId(response.data.classes[0]._id);
           }
-          setShowToast(true);
-          setToastMessage(response.message || "Classes fetched successfully");
-          setToastType("success");
         } else {
           setError(response.message);
           setShowToast(true);
@@ -88,9 +84,7 @@
 
           if (response.status === 200 || response.status === 204 || response.status === 201) {
             setSubjects(response.data);
-            setShowToast(true);
-            setToastMessage("Subjects fetched successfully");
-            setToastType("success");
+        
           } else {
             setError(response.message);
             setShowToast(true);
@@ -245,7 +239,7 @@
               >
                 <button
                   onClick={() => setShowAddSubject(false)}
-                  className="absolute top-6 mb-2 right-5 lg:right-6 p-2  bg-white rounded-full z-50 text-black-300 hover:text-black-300 transition-colors duration-200 transform hover:scale-110"
+                  className="absolute top-6 mb-2 right-5 lg:right-6 p-2  bg-white rounded-full z-50 text-black-300 hover:text-gray-800 transition-colors duration-200 transform hover:scale-110"
                 >
                   <X size={24} />
                 </button>
@@ -278,7 +272,6 @@
                 <tbody>
                   {(error || subjects?.length === 0)? (
                     <tr>
-                      
                       <td colSpan="6" className="text-center p-4">
                         {error || "No subjects available for this class"}
                       </td>
@@ -361,21 +354,8 @@
             </div>
           </div>
         )}
-    {subjects.length===0 && (
-         <div className="flex flex-col items-center justify-center mt-4 p-4">
-<img
 
-src={oops}
-alt="Failure"
-className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] 
-lg:h-[350px]  rounded-lg"
 
-/>
-
-</div> 
-      )}
-
-      
       </div>
     );
   };

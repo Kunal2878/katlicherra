@@ -11,13 +11,12 @@ import AddStudents from "../../Pages/Student/AddStudent";
 import UpdateStudents from "../../Pages/Student/UpdateStudent";
 import ViewStudentDetails from '../../Pages/Student/ViewStudentsDetails/ViewStudentDetails';
 import { useSelector, useDispatch } from "react-redux";
-import { setStudentData, setCurrentPage,setIsStudentUpdate } from "../../../Store/slice";
-import { education,  onboarding, oops } from "../../../assets/index";
+import { setStudentData, setCurrentPage,setIsStudentUpdate } from "../../../Store/slice"; 
 import { toast } from 'react-toastify';
 import {  GetAllClassesAPI,GetStudentByClassAPI} from '../../../service/api';
 import Table from "../Elements/Table";
 import Pagination from "../Elements/Pagination";
-import SelectDropdown from "../../Components/Elements/SelectDropdown";
+import SelectDropdown from "../Elements/SelectDropDown";
 
 const StudentDetails = () => {
   const [loading, setLoading] = useState(true);
@@ -74,9 +73,6 @@ const StudentDetails = () => {
       if(response.status===200 || response.status===201 || response.status===204){
         
         dispatch(setStudentData(response.data.students || []));
-        setShowToast(true);
-        setToastMessage(response.message);
-        setToastType('success');
       }
       else {
         console.error("Error fetching classes:", error);
@@ -375,6 +371,9 @@ useEffect(() => {
               />
             </div>
        
+       
+    
+
         {/* Table Component */}
         <Table
           columns={columns}
@@ -386,25 +385,20 @@ useEffect(() => {
           extraClasses="m-4"
         />
       
-{students.length===0 &&(
+      {students.length===0 &&(
   <p className="text-gray-500 text-lg mb-6">No students available yet, be the first to create one</p>
 
 )}
 
+
+
       </div>
 
-      {/* Show failure image if no classes or students */}
-      {students.length===0 && (
-         <div className="flex flex-col items-center justify-center mt-4 p-4 ">
-            
+    
 
-<img
-src={oops}
-alt="Failure"
-className="w-[300px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[300px] lg:w-[600px] lg:h-[350px]  rounded-lg"
-/>
-</div> 
-      )}
+
+
+
 
       {/* Pagination Component */}
       {paginationData.totalPages > 0 && (

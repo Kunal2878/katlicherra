@@ -6,7 +6,7 @@ import Toast from "../../Components/Toast";
 import axios from 'axios';
 import {  GetAllClasses } from '../../Route';
 import { Upload, School } from 'lucide-react';
-import SelectDropdown from '../../Components/Elements/SelectDropdown';
+import SelectDropdown from '../../Components/Elements/SelectDropDown';
 
 const UploadTimeTable = () => {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
@@ -44,10 +44,10 @@ console.log(selectedFile)
     setLoading(true);
     const formData = new FormData();
     formData.append('timetable', selectedFile);
-    console.log(formData)
+   
     const classInfo = classes.find(classItem => classItem.className === selectedClass);
     const classId = classInfo ? classInfo._id : null;
-    console.log(formData)
+
     if (!classId) {
       setToastMessage("Class ID not found");
       setLoading(false);
@@ -150,7 +150,7 @@ console.log(selectedFile)
           </div>
           {selectedFile && (
             <div className="mt-4 w-full">
-              <p className="text-sm text-black-200 truncate text-center mb-3">
+              <p className="text-sm text-gray-600 truncate text-center mb-3">
                 Selected: {selectedFile.name}
               </p>
               <button

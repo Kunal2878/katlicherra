@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
-import { education,  onboarding, oops } from "../../assets";
+import { education,  onboarding } from "../../assets";
 import { Link } from 'react-router-dom';
 import { LoginUser } from '../../service/api';
 import Input from '../Components/Elements/Input';
@@ -108,7 +108,8 @@ const Login = () => {
                 Hi there 👋
               </h1>
               <h2 className="mt-6 text-black">
-                Get Started with <span className="text-purpleColor">Katlicherra Central School </span>
+                Get Started with <span className="text-purpleColor"> Katlicherra Central School</span>
+                
               </h2>
               {role !== "principal" && (
                 <span className="text-purpleColor">
