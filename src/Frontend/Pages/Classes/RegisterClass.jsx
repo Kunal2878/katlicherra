@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { setTeacherData, setClassData } from "../../../Store/slice";
 import { GetTeachers,GetAllTeachersAPI, CreateClassAPI } from '../../../service/api';
-import SelectDropdown from "../../Components/Elements/SelectDropDown"
+import SelectDropdown from "../../Components/Elements/SelectDropDownList"
 import Input from "../../Components/Elements/Input"; 
 
 const RegisterClass = () => {

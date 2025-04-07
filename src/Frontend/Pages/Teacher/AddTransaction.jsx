@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { setTeacherData,setTransactionUpdate } from "../../../Store/slice";
 import { GetAllTeachersAPI,AcceptRejectPayReqAPI } from '../../../service/api';
-import SelectDropdown from "../../Components/Elements/SelectDropDown"; 
+import SelectDropdown from "../../Components/Elements/SelectDropDownList"; 
 import Input from "../../Components/Elements/Input"; 
 
 const AddTransactions = () => {

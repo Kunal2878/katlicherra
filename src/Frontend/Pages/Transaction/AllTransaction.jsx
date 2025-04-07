@@ -12,7 +12,7 @@ import { setTeacherData,setCurrentPage,setTransactionData } from "../../../Store
 import { GetTeachers,GetTeachersPages, GetTransactionsByTeacherAPI } from '../../../service/api';
 import Table from "../../Components/Elements/Table";
 import Pagination from "../../Components/Elements/Pagination";
-import SelectDropdown from "../../Components/Elements/SelectDropDown"; 
+import SelectDropdown from "../../Components/Elements/SelectDropDownList"; 
 const AllTransactions = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

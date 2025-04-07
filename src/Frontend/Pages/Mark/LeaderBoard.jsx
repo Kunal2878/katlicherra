@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 import {setLeaderBoard,setClassData,setIsLeaderBoardUpdate} from '../../../Store/slice'
 import {GetLeaderBoardAPI, GetAllClassesAPI  ,GetStudentByIDAPI} from '../../../service/api'
 import {useSelector, useDispatch} from 'react-redux'
-import SelectDropdown from '../../Components/Elements/SelectDropDown'
+import SelectDropdown from '../../Components/Elements/SelectDropDownList'
 import { toast } from 'react-toastify';
 const LeaderBoard = () => {
   const [selectedClass, setSelectedClass] = useState("");
