@@ -462,6 +462,7 @@ export const GetAllLeavesAPI = async (url) => {
 
 
 export const GetAllTeacherCountAPI = async (url) => {
+  console.log(url)
   try {
     const endpoint = `${url}${GetAllTeacherCount}`;
     const response = await axios.get(endpoint);
