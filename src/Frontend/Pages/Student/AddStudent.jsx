@@ -10,7 +10,7 @@ import { setStudentData,setIsStudentUpdate } from "../../../Store/slice";
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../Components/Elements/Input";
-import SelectDropdown from "../../Components/Elements/SelectDropDown";
+import SelectDropdown from "../../Components/Elements/SelectDropdownList";
 
 const AddStudents = () => {
   const {

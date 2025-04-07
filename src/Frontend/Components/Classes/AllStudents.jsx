@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import {  GetAllClassesAPI,GetStudentByClassAPI} from '../../../service/api';
 import Table from "../Elements/Table";
 import Pagination from "../Elements/Pagination";
-import SelectDropdown from "../Elements/SelectDropDown";
+import SelectDropdown from "../Elements/SelectDropdownList";
 
 const StudentDetails = () => {
   const [loading, setLoading] = useState(true);

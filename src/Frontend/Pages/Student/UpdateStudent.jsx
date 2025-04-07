@@ -11,7 +11,7 @@
   import { GetAllClasses, GetSubjectByClass,UpdateStudent } from "../../Route";
   import { GetStudents } from '../../../service/api';
   import Input from "../../Components/Elements/Input";
-  import SelectDropdown from "../../Components/Elements/SelectDropDown";
+  import SelectDropdown from "../../Components/Elements/SelectDropdownList";
 
   
   const UpdateStudents = (StudentData) => {
