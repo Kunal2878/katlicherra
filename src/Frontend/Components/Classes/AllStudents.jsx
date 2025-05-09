@@ -138,6 +138,18 @@ useEffect(() => {
   // Table columns definition
   const columns = [
     {
+      field: '_id',
+      headerName: "Student's Id",
+      renderCell: (row) => (
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-lamaPurpleLight rounded-full overflow-hidden flex flex-row justify-center items-center">
+            <GraduationCap size={20} />
+          </div>
+          <span>{row._id || ''}</span>
+        </div>
+      ),
+    },
+    {
       field: 'name',
       headerName: "Student's Name",
       renderCell: (row) => (

@@ -165,13 +165,27 @@ const AddStudents = () => {
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
           />
           
+        <Input
+        id="studentId"
+        name="studentId"
+        label="Student ID"
+        register={register}
+        errors={errors}
+        placeholder="Student ID"
+        icon={IdCard}
+        className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
+        disabled={true}
+        value="AUTO-GENERATED" // Optional: Display a default value
+      />
+
+
+
           <Input
             id="email"
             name="email"
-            label="Student Email/Admission No."
+            label="Student Email"
             register={register}
             errors={errors}
-            required="Email is required"
             type="email"
             placeholder="Email Address"
             icon={Mail}
@@ -198,10 +212,10 @@ const AddStudents = () => {
    <Input
             id="studentPan"
             name="studentPan"
-            label="Student Pan"
+            label="Student Pen"
             register={register}
             errors={errors}
-            required="Pan is required"
+           
             placeholder="Student Pan"
             icon={IdCard}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
@@ -212,7 +226,7 @@ const AddStudents = () => {
             label="Student Aadhaar ID"
             register={register}
             errors={errors}
-            required="Student Aadhaar is required"
+          
             placeholder="Student Aadhaar"
             icon={IdCard}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
@@ -223,7 +237,7 @@ const AddStudents = () => {
             label="Aadhaar ID of Mother"
             register={register}
             errors={errors}
-            required="Aadhaar ID of Mother is required"
+            
             placeholder="Aadhaar ID of Mother"
             icon={IdCard}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
@@ -234,7 +248,7 @@ const AddStudents = () => {
             label="Aadhaar ID of Father"
             register={register}
             errors={errors}
-            required="Aadhaar ID of Father is required"
+            
             placeholder="Aadhaar ID of Father"
             icon={IdCard}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
@@ -245,7 +259,7 @@ const AddStudents = () => {
             label="Address"
             register={register}
             errors={errors}
-            required="Address is required"
+            
             placeholder="Address"
             icon={MapPin}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
@@ -256,7 +270,7 @@ const AddStudents = () => {
             label="Phone No."
             register={register}
             errors={errors}
-            required="Phone No. is  required"
+            
             type="text"
             placeholder="eg. 9876543210"
             icon={Phone}
@@ -274,7 +288,7 @@ const AddStudents = () => {
             label="Whatsapp No."
             register={register}
             errors={errors}
-            required="Whatsapp No. is required"
+           
             type="text"
             placeholder="eg. 9876543210"
             icon={Phone}
@@ -293,7 +307,7 @@ const AddStudents = () => {
             label="Parent Name"
             register={register}
             errors={errors}
-            required="Parent name is required"
+          
             placeholder="Parent Name"
             icon={User}
             className="w-full sm:w-96 md:w-[24rem] lg:w-[28rem] mx-auto"
@@ -305,7 +319,7 @@ const AddStudents = () => {
             label="Parent Contact"
             register={register}
             errors={errors}
-            required="Parent contact is required"
+            
             type="text"
             placeholder="Parent Contact"
             icon={Phone}
