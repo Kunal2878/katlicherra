@@ -283,7 +283,7 @@ const IDCardGenerator = () => {
             
               className="relative w-full max-w-sm aspect-[9/13] bg-white text-black"
               style={{
-                backgroundImage: "url('/IDCard.png')",
+                backgroundImage: "url('/IDCard_2.png')",
                 backgroundSize: '100% 100%',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
