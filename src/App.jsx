@@ -192,10 +192,10 @@ function App() {
       path:'/finance',
       element:<UnderMaintenance/>
     },
-    {
-      path:'/test',
-      element:<Test/>
-    },
+    // {
+    //   path:'/test',
+    //   element:<Test/>
+    // },
     {
       path:'/know-more',
       element:<About/>

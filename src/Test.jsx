@@ -11,7 +11,7 @@ import AddTransactions from './Frontend/Pages/Transaction/AddTransaction'
 const Test = () => {
     return (
         <div>
-            <AddTransactions/>
+            <IDCardGenerator/>
         </div>
     );
 };

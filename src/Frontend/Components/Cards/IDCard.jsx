@@ -283,7 +283,7 @@ const IDCardGenerator = () => {
             
               className="relative w-full max-w-sm aspect-[9/13] bg-white text-black"
               style={{
-                backgroundImage: "url('/IDCard.png')",
+                backgroundImage: "url('/IDCard_3.png')",
                 backgroundSize: '100% 100%',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -291,10 +291,11 @@ const IDCardGenerator = () => {
               }}
               >
               {/* Organization Logo */}
-              <div className="absolute" style={{ top: '5%', left: '5%' }}>
+              <div className="absolute flex flex-row" style={{ top: '5%', left: '5%' }}>
+                <img src="/katlicherra.png" className="size-8"/>
                 {/* Logo will be part of the background image */}
+              <span className="ml-2 text-white flex-row items-center text-wrap">Katlicherra Central School</span>
               </div>
-              
               {/* Profile Photo */}
               <div className="absolute" style={{ top: '22%', left: '50%', transform: 'translateX(-50%)' }}>
                 {userPhoto ? (
